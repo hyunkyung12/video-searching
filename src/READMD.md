@@ -3,10 +3,11 @@
 
 ####1. 실행 방법:
 ````
-$ python3 find_a_word_in_corpus.py word
+$ python3 find_a_word_in_corpus.py data func word
 ````
-부분에 검색할 단어 입력
-(단어는 띄어쓰기를 포함하지 않아야함)
+data : csv 파일명
+fucn : 0이면 find_a_word
+word : 검색할 단어 입력
 
 ####2. 결과: 
 check_list.csv 파일이 생성됨
