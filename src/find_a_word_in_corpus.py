@@ -31,8 +31,8 @@ def a_word(word,table):
     result = result.reset_index()[['url','start','end']]
     return result
 
-def find(table, func,find):
-    result = func(find,table)   
+def find(table, func,target_word):
+    result = func(target_word,table)   
     result.to_csv(path + '/data/check_list.csv')
     return result
 
