@@ -1,0 +1,4 @@
+beautifulsoup
+selenium
+pandas
+numpy
