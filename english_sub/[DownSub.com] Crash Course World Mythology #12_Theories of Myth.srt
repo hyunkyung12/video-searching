@@ -1,0 +1,916 @@
+1
+00:00:00,500 --> 00:00:01,000
+Hey there, I'm Mike Rugnetta
+
+2
+00:00:01,500 --> 00:00:02,000
+This is Crash Course mythology,
+
+3
+00:00:02,900 --> 00:00:04,580
+and in the first episode of this series,
+
+4
+00:00:04,760 --> 00:00:06,440
+we defined what we mean by myth.
+
+5
+00:00:07,040 --> 00:00:09,520
+I also said that we weren't gonna get too theoretical
+
+6
+00:00:09,520 --> 00:00:12,120
+because the theory of mythology gets complicated quickly--
+
+7
+00:00:12,120 --> 00:00:17,300
+but you all have <i>asked</i> for an episode on theories of mythology;
+
+8
+00:00:17,320 --> 00:00:18,680
+...and if you know me, and the other things that I make,
+
+9
+00:00:18,680 --> 00:00:21,620
+you know how I feel.. about talking theory.
+
+10
+00:00:21,620 --> 00:00:22,940
+So... that's what we're gonna do;
+
+11
+00:00:22,940 --> 00:00:26,000
+and, ok, that ask may have just been some strong-arming from Thoth,
+
+12
+00:00:26,060 --> 00:00:28,360
+but who can say no to that face?!?
+
+13
+00:00:28,500 --> 00:00:33,500
+[intro music]
+
+14
+00:00:37,760 --> 00:00:41,040
+So.. let's look at how people think about mythology
+
+15
+00:00:41,040 --> 00:00:43,240
+and give you some ideas about how to analyze
+
+16
+00:00:43,360 --> 00:00:44,660
+myths yourself.
+
+17
+00:00:44,660 --> 00:00:46,460
+We're gonna start with the definition of
+
+18
+00:00:46,460 --> 00:00:47,440
+MYTH - OLOGY
+
+19
+00:00:47,440 --> 00:00:49,800
+Unlike myths themselves, which as we pointed out
+
+20
+00:00:49,800 --> 00:00:51,920
+are difficult to define, mythology
+
+21
+00:00:51,920 --> 00:00:53,320
+is pretty straightforward--
+
+22
+00:00:53,320 --> 00:00:56,300
+since in english, "ology" means basically the study of--
+
+23
+00:00:56,440 --> 00:00:59,320
+"mythology" is the systematic study of myths...
+
+24
+00:00:59,320 --> 00:01:01,360
+...a thing you probably already figured out for yourself
+
+25
+00:01:01,360 --> 00:01:02,960
+at this point in the series.
+
+26
+00:01:02,960 --> 00:01:04,140
+The real question is..
+
+27
+00:01:04,140 --> 00:01:05,620
+HOW are myths studied,
+
+28
+00:01:05,620 --> 00:01:08,060
+and for that we're gonna jump in our time-machine
+
+29
+00:01:08,060 --> 00:01:10,320
+--courtesy of Zurvan the zoroastrian god of time--
+
+30
+00:01:10,320 --> 00:01:13,400
+check your divine flux capacitor and buckle up.
+
+31
+00:01:13,400 --> 00:01:15,700
+So, we start in ancient Greece. In the first episode
+
+32
+00:01:15,700 --> 00:01:20,300
+I mentioned that critical analysis of myths has been around for a long time.
+
+33
+00:01:20,300 --> 00:01:23,240
+As early as the mid 500's BCE
+
+34
+00:01:23,240 --> 00:01:27,180
+presocratic philosophers like Xenophanes were criticizing Hesiod and Homer
+
+35
+00:01:27,320 --> 00:01:32,360
+for attributing all of the evil and shameful aspects of humanity to the gods.
+
+36
+00:01:32,660 --> 00:01:36,260
+Plato was among the first to equate myths with 'lying'
+
+37
+00:01:36,320 --> 00:01:39,680
+and, as we discussed in episode 1, that idea has stuck.
+
+38
+00:01:39,680 --> 00:01:43,200
+But Plato further complicated this issue because he claimed that myths about
+
+39
+00:01:43,200 --> 00:01:49,640
+gods, heroes, and fantastic creatures were irrational and therefore, 'false.'
+
+40
+00:01:49,640 --> 00:01:53,660
+Yet philosophical myths like the ones he put forward in "The Republic"
+
+41
+00:01:53,760 --> 00:01:56,320
+served a rational purpose.. and were 'true.'
+
+42
+00:01:56,320 --> 00:02:00,340
+Sorry Thoth, you're gonna have to talk it over with Veritas, Roman goddess of truth.
+
+43
+00:02:00,340 --> 00:02:03,400
+A little bit after Plato came the influential thinker Euhemeros.
+
+44
+00:02:03,400 --> 00:02:08,300
+He assumed that people who lived before him were primitive, with no concept of science,
+
+45
+00:02:08,300 --> 00:02:13,500
+so they created fanciful versions of historical events to explain things they didn't understand.
+
+46
+00:02:13,620 --> 00:02:19,060
+In Euhemeros's opinion, Zeus was an early human king whose deeds became legendary and,
+
+47
+00:02:19,380 --> 00:02:23,300
+as those legends were retold, he transformed into a god.
+
+48
+00:02:23,720 --> 00:02:28,500
+Euhemerism has come to mean interpreting "Myths as primitive explanations of the natural world
+
+49
+00:02:28,500 --> 00:02:34,000
+or as time-distorted accounts of long-past historical events."
+
+50
+00:02:34,020 --> 00:02:41,020
+Although Euhemeros wasn't particularly influential in his own time, his ideas were picked up later by Roman thinkers--
+
+51
+00:02:41,020 --> 00:02:42,120
+--especially Christians.
+
+52
+00:02:42,120 --> 00:02:48,220
+Early church-thinkers, like Tertullian and Clement of Alexanderia, took up the Platonic sense of myth as 'falsehood',
+
+53
+00:02:48,220 --> 00:02:54,020
+and upon it they based a new theory: that the Greek and Roman myths were influenced by demons
+
+54
+00:02:54,020 --> 00:02:59,580
+who wanted the stories to prepare their listeners for the story of Jesus, and to provide a contrast between him
+
+55
+00:02:59,640 --> 00:03:01,700
+and the pagan gods.
+
+56
+00:03:01,700 --> 00:03:05,460
+..so, I mean, those are some pretty helpful demons.. I guess?
+
+57
+00:03:05,460 --> 00:03:10,480
+These early mythologists set up a dichotomy between 'mythos,' associated with falsehood,
+
+58
+00:03:10,480 --> 00:03:14,300
+and 'logos,' which Christian thinkers associated with transcendant truth.
+
+59
+00:03:14,300 --> 00:03:20,500
+This synthesis of Plato and Christianity was the basis of Western mythology until the Renaissance.
+
+60
+00:03:20,740 --> 00:03:26,740
+For many centuries European artists drew a great deal from classical Greek and Roman myths
+
+61
+00:03:26,880 --> 00:03:32,000
+but, mythology as a study didn't really take off until the 18th and 19th centuries,
+
+62
+00:03:32,000 --> 00:03:38,560
+drawing on the linguistic discovery that the languages of India, SouthWest-Asia and Europe are all related--
+
+63
+00:03:38,860 --> 00:03:41,740
+they're all derived from a single language,
+
+64
+00:03:41,740 --> 00:03:44,040
+now known as "Proto-Indo-Europian".
+
+65
+00:03:44,040 --> 00:03:49,560
+The discovery of Proto-Indo-Europian led some to posit that it was spoken by a group called "Aryans,"
+
+66
+00:03:49,560 --> 00:03:54,220
+whose myths were the basis for all European, Indian, and Southwest-Asian myths--
+
+67
+00:03:54,220 --> 00:03:57,400
+--a purported explanation for their similarities.
+
+68
+00:03:57,400 --> 00:04:03,160
+In addition to the Aryan hypothesis, this discovery also gave way to a broadly comparative mythology
+
+69
+00:04:03,180 --> 00:04:07,100
+that focused much more on origin and content than function.
+
+70
+00:04:07,100 --> 00:04:10,200
+There's no real evidence that these Aryans ever existed,
+
+71
+00:04:10,200 --> 00:04:13,700
+but that didn't stop romantic thinkers like Johann Gottfried Herder
+
+72
+00:04:13,780 --> 00:04:20,779
+who believed that their myths, along with other things, embodied the simplicity and purity of the German 'volk.'
+
+73
+00:04:20,779 --> 00:04:26,440
+That sounds innocuous enough until we learn that the Nazis would later appropriate Herders pro-German ideas
+
+74
+00:04:26,440 --> 00:04:30,780
+to justify their atrocities and legitimize their hateful ideology.
+
+75
+00:04:30,780 --> 00:04:36,760
+The study of myth changes again in the 20th century when it joins forces with the new discipline of anthropology.
+
+76
+00:04:36,760 --> 00:04:42,720
+Anthropologists wouldn't just read about myths in libraries, they would conduct fieldwork
+
+77
+00:04:42,720 --> 00:04:46,000
+to discover how myths functioned in living societies.
+
+78
+00:04:46,000 --> 00:04:51,040
+Although in the early days of anthropology the object of study was still societies considered 'primitive,'
+
+79
+00:04:51,040 --> 00:04:52,980
+...at least by those anthropologists.
+
+80
+00:04:52,980 --> 00:04:54,260
+Let's go to the thought bubble--
+
+81
+00:04:54,720 --> 00:05:01,720
+One of the towering figures in this new way of studying myths was the Scottish anthropologist Sir James Frazer
+
+82
+00:05:01,720 --> 00:05:03,640
+who could really rock a beard.
+
+83
+00:05:03,880 --> 00:05:06,360
+His twelve volume book, "The Golden Bough,"
+
+84
+00:05:06,480 --> 00:05:11,200
+centers on different versions of a myth in which sacred kings are slaughtered
+
+85
+00:05:11,200 --> 00:05:13,600
+in order to ensure a bountiful harvest.
+
+86
+00:05:13,620 --> 00:05:17,200
+Frazer supported the concepts of myths as primitive science,
+
+87
+00:05:17,200 --> 00:05:20,620
+which attributed to the will of deities, people or animals
+
+88
+00:05:20,620 --> 00:05:24,000
+that which modern science attributes to the impersonal functioning of
+
+89
+00:05:24,000 --> 00:05:26,900
+various physical laws and biological processes.
+
+90
+00:05:26,960 --> 00:05:30,780
+That's another way of saying, "Hey, if you haven't quite mastered physics, blame a god."
+
+91
+00:05:30,780 --> 00:05:31,900
+To be honest, that's what I do.
+
+92
+00:05:32,000 --> 00:05:34,200
+Ooooh! A GOD!
+
+93
+00:05:34,300 --> 00:05:36,200
+One of the mythologists to follow Frazer,
+
+94
+00:05:36,200 --> 00:05:39,600
+Bronisław Malinowski, did fieldwork in the Trobriand Islands
+
+95
+00:05:39,600 --> 00:05:45,000
+and outlined the new anthropological view of myth that grew out of working with living peoples.
+
+96
+00:05:45,000 --> 00:05:51,000
+Studied alive, myth... is not symbolic, but a direct expression of its subject-matter;
+
+97
+00:05:51,000 --> 00:05:54,000
+... a narrative resurrection of a primeval reality,
+
+98
+00:05:54,000 --> 00:05:58,000
+... Myth fulfills in primitive culture an indispensable function;
+
+99
+00:05:58,000 --> 00:06:01,500
+it expresses, enhances and codifies belief;
+
+100
+00:06:01,500 --> 00:06:04,000
+it safeguards and enforces morality;
+
+101
+00:06:04,000 --> 00:06:07,500
+it vouches for the efficiency of ritual
+
+102
+00:06:07,500 --> 00:06:11,500
+and contains practical rules for the guidance of man.
+
+103
+00:06:11,500 --> 00:06:16,000
+Yeah, that 'primitive peoples' part is a little hard to take. Early anthropology was pretty judgy.
+
+104
+00:06:16,000 --> 00:06:18,000
+But this new approach had the advantage of
+
+105
+00:06:18,000 --> 00:06:21,500
+focusing on what so-called primitive people know,
+
+106
+00:06:21,500 --> 00:06:23,000
+rather than what they don't.
+
+107
+00:06:23,000 --> 00:06:26,000
+Building on the work of anthropologists, recent mythologists
+
+108
+00:06:26,000 --> 00:06:31,000
+have tried to connect their work to the lived experiences of actual human beings.
+
+109
+00:06:31,000 --> 00:06:32,220
+--Thanks, Thought Bubble!
+
+110
+00:06:32,220 --> 00:06:35,000
+At around the same time that anthropology was gaining prominence,
+
+111
+00:06:35,000 --> 00:06:38,000
+the new field of psychology was also looking to myths
+
+112
+00:06:38,040 --> 00:06:40,360
+for an explanation of human experience.
+
+113
+00:06:40,360 --> 00:06:42,500
+Two of the best known psychologists,
+
+114
+00:06:42,500 --> 00:06:44,500
+Sigmund Freud and Carl Jung,
+
+115
+00:06:44,500 --> 00:06:48,000
+posit that the source of myths is the human unconscious,
+
+116
+00:06:48,000 --> 00:06:51,700
+and that mythical characters are projections of that unconscious.
+
+117
+00:06:51,700 --> 00:06:54,060
+We're gonna return to these thinkers in a later episode,
+
+118
+00:06:54,060 --> 00:06:58,540
+but for now it's helpful to understand the fundamental difference between the two.
+
+119
+00:06:58,540 --> 00:07:02,720
+For Freud, the unconscious is the true psychical reality;
+
+120
+00:07:02,720 --> 00:07:05,200
+but our conscious minds, like Tom Cruise,
+
+121
+00:07:05,200 --> 00:07:07,160
+"CAN'T HANDLE THE TRUTH!!"
+
+122
+00:07:07,160 --> 00:07:12,440
+So we make these terrible realities palatable, by creating imaginative works,
+
+123
+00:07:12,440 --> 00:07:13,140
+like myths,
+
+124
+00:07:13,140 --> 00:07:19,480
+which are strategies for managing the internal forces that shape our thoughts, feelings and actions.
+
+125
+00:07:19,480 --> 00:07:22,520
+Jung similarly saw myths as a projection of the unconscious,
+
+126
+00:07:22,520 --> 00:07:25,740
+but for him.. the unconscious was collective and universal
+
+127
+00:07:26,020 --> 00:07:27,520
+--NOT individual.
+
+128
+00:07:27,520 --> 00:07:30,500
+It's like a reservoir, from which we all drink.
+
+129
+00:07:30,560 --> 00:07:33,740
+A reservoir with more dreams... and less flouride
+
+130
+00:07:33,740 --> 00:07:36,160
+They put that in the reservoir itself, right?
+
+131
+00:07:36,160 --> 00:07:39,200
+Jung defined a number of archetypes that he saw as aspects of every person's psyche
+
+132
+00:07:39,200 --> 00:07:43,200
+and, in his estimation, the characters that appear in myths
+
+133
+00:07:43,200 --> 00:07:44,800
+are versions of these archetypes.
+
+134
+00:07:44,800 --> 00:07:47,200
+The collective nature of human consciousness
+
+135
+00:07:47,200 --> 00:07:51,000
+may be one reason we can find similar mythic characters
+
+136
+00:07:51,000 --> 00:07:53,800
+from stories originating in many parts of the world.
+
+137
+00:07:53,800 --> 00:07:57,200
+And of course, we couldn't do an episode on thoeries of mythology
+
+138
+00:07:57,200 --> 00:08:00,200
+without mentioning the best known mythologist of the twentieth century,
+
+139
+00:08:00,200 --> 00:08:02,200
+Lets hear it for: Joseph Campbell.
+
+140
+00:08:02,200 --> 00:08:05,200
+Campbell became famous in the 1980s for a television series,
+
+141
+00:08:05,200 --> 00:08:07,600
+"The Power of Myth," also with Bill Moyers.
+
+142
+00:08:07,600 --> 00:08:12,000
+And George Lucas also credited Campbell with influencing Star Wars.
+
+143
+00:08:12,000 --> 00:08:15,800
+Luke, guess... he's your father.
+
+144
+00:08:15,800 --> 00:08:17,000
+More on that later.
+
+145
+00:08:17,000 --> 00:08:19,800
+Campbell's understanding of myth, and particularly of hero stories,
+
+146
+00:08:19,800 --> 00:08:24,000
+is a reflection of the American valorization of rugged individuals.
+
+147
+00:08:24,000 --> 00:08:27,200
+For Campbell, "Mythology is ultimately and always
+
+148
+00:08:27,200 --> 00:08:29,600
+the vehicle through which the individual
+
+149
+00:08:29,600 --> 00:08:32,600
+finds a sense of identity and place in the world."
+
+150
+00:08:32,600 --> 00:08:34,799
+Campbell synthesized the ideas of psychoanalysts,
+
+151
+00:08:34,799 --> 00:08:37,799
+comparative mythologists, and literary and cultural critics
+
+152
+00:08:37,799 --> 00:08:41,499
+to create his own theory of a single "mono-myth"
+
+153
+00:08:41,500 --> 00:08:43,500
+that underlies all mythical stories.
+
+154
+00:08:43,500 --> 00:08:46,700
+Meanwhile, French anthropologist, Claude Levi-Strauss
+
+155
+00:08:46,700 --> 00:08:48,200
+-- no relationship to the blue-jeans --
+
+156
+00:08:48,200 --> 00:08:52,000
+developed a theory for describing myths by looking at their structure.
+
+157
+00:08:52,000 --> 00:08:55,800
+Structuralism holds that specific instances of culture,
+
+158
+00:08:55,800 --> 00:09:00,360
+like myths, betray a much more complicated underlying structure.
+
+159
+00:09:00,360 --> 00:09:02,800
+What that structure is, and how it works,
+
+160
+00:09:02,800 --> 00:09:06,000
+depends upon which structuralist you're talking to.
+
+161
+00:09:06,000 --> 00:09:09,700
+Levi-Strauss, arguably the first structuralist, was all about...
+
+162
+00:09:09,700 --> 00:09:10,800
+BINARIES.
+
+163
+00:09:10,800 --> 00:09:12,800
+Culture is built a relationship between..
+
+164
+00:09:12,800 --> 00:09:14,000
+male and female,
+
+165
+00:09:14,000 --> 00:09:14,800
+hero and villain,
+
+166
+00:09:14,800 --> 00:09:17,000
+even cooked and raw, among many others.
+
+167
+00:09:17,000 --> 00:09:20,200
+For him, myths, like all units of culture,
+
+168
+00:09:20,200 --> 00:09:23,600
+sit atop these inescapable opposing binaries.
+
+169
+00:09:23,600 --> 00:09:27,200
+And, since many students of mythology will have heard of him and his theories,
+
+170
+00:09:27,200 --> 00:09:30,000
+we should also mention Romanian religious historian,
+
+171
+00:09:30,000 --> 00:09:31,200
+Mircea Eliade.
+
+172
+00:09:31,200 --> 00:09:36,000
+Even though his personal politics have overshadowed his scholarship in many circles.
+
+173
+00:09:36,000 --> 00:09:40,800
+Eliade was a Romanian nationalist who associated with a proto-fascist group
+
+174
+00:09:40,800 --> 00:09:45,200
+and thus his reputation, like that of Herder and Nietzsche, has suffered.
+
+175
+00:09:45,200 --> 00:09:46,000
+Hey!
+
+176
+00:09:46,000 --> 00:09:47,000
+Mythologists!
+
+177
+00:09:47,000 --> 00:09:48,800
+No more chillin' with fascists, ok?
+
+178
+00:09:48,800 --> 00:09:50,500
+I feel like I shouldn't even have to ask this.
+
+179
+00:09:50,500 --> 00:09:52,500
+Eliade was also a fan of binaries;
+
+180
+00:09:52,500 --> 00:09:55,200
+particularly the sacred and the profane,
+
+181
+00:09:55,200 --> 00:09:57,800
+as well as the archaic and the modern.
+
+182
+00:09:57,800 --> 00:10:01,800
+For Eliade, archaic people were more in-touch with the sacred.
+
+183
+00:10:01,800 --> 00:10:05,500
+And today myths allow us to escape the profane,
+
+184
+00:10:05,500 --> 00:10:07,000
+to travel back to the past,
+
+185
+00:10:07,000 --> 00:10:09,000
+and re-encounter the sacred.
+
+186
+00:10:09,000 --> 00:10:12,500
+Structuralist theory was very popular at the end of the twentieth century,
+
+187
+00:10:12,500 --> 00:10:15,800
+but it also left a lot of people wondering, "so what?"
+
+188
+00:10:15,800 --> 00:10:18,600
+What do we gain by reducing all myths to a set of patterns,
+
+189
+00:10:18,600 --> 00:10:20,600
+or even to one single pattern?
+
+190
+00:10:20,600 --> 00:10:22,000
+What does that really tell us about-
+
+191
+00:10:22,000 --> 00:10:25,800
+-why cultures use myth, or how myth reveals culture?
+
+192
+00:10:25,800 --> 00:10:29,000
+Contemporary approaches have pioneered some new methods
+
+193
+00:10:29,000 --> 00:10:32,000
+of asking and answering these questions.
+
+194
+00:10:32,000 --> 00:10:35,200
+William Doty proposes giving students of myth a toolkit
+
+195
+00:10:35,200 --> 00:10:38,800
+which includes a series of questions to ask when reading myths,
+
+196
+00:10:38,800 --> 00:10:41,000
+centering on several concerns:
+
+197
+00:10:41,000 --> 00:10:41,800
+the social,
+
+198
+00:10:41,800 --> 00:10:42,800
+the psychological,
+
+199
+00:10:42,800 --> 00:10:43,500
+the literary,
+
+200
+00:10:43,500 --> 00:10:45,500
+textual and performative,
+
+201
+00:10:45,500 --> 00:10:48,200
+the structural and, finally, the political.
+
+202
+00:10:48,200 --> 00:10:51,200
+These provide a broader way of looking at myths.
+
+203
+00:10:51,200 --> 00:10:54,800
+Wendy Doniger provides an updated version of comparative mythology,
+
+204
+00:10:54,800 --> 00:10:59,000
+asking myth readers to look also at the context in which the myth is told--
+
+205
+00:10:59,000 --> 00:11:00,800
+exploring difference.
+
+206
+00:11:00,800 --> 00:11:03,500
+These more contemporary ways of looking at myths
+
+207
+00:11:03,500 --> 00:11:07,800
+fit well with the complex view of the world that we try to take here at Crash Course.
+
+208
+00:11:07,800 --> 00:11:10,200
+but, we're not going to follow any one school of thought
+
+209
+00:11:10,200 --> 00:11:14,200
+when it comes to how we "-ology" these here "myths".
+
+210
+00:11:14,200 --> 00:11:16,000
+We like being eclectic,
+
+211
+00:11:16,000 --> 00:11:20,200
+and have no interest in forcing you to see myths in one particular way.
+
+212
+00:11:20,200 --> 00:11:22,600
+Hadúr, Hungarian god of forests?
+
+213
+00:11:22,600 --> 00:11:24,000
+Got my eye on you!
+
+214
+00:11:24,000 --> 00:11:26,000
+Thanks for watching, we'll see you next time.
+
+215
+00:11:26,000 --> 00:11:28,400
+Check out our Crash Course Mythology
+
+216
+00:11:28,400 --> 00:11:34,200
+"Thoth-Tote Bag" and poster, available now at DFTBA.COM.
+
+217
+00:11:34,200 --> 00:11:40,000
+Crash Course Mythology is filmed in the Chad & Stacey Emigholz Studio in Indianapolis, Indiana,
+
+218
+00:11:40,000 --> 00:11:43,100
+it is produced with the help of all of these nice people.
+
+219
+00:11:43,100 --> 00:11:45,100
+Our animation team is Thought Cafe
+
+220
+00:11:45,100 --> 00:11:49,800
+and Crash Course exists thanks to the generous support of our patrons at Patreon.
+
+221
+00:11:49,800 --> 00:11:52,000
+Patreon is a voluntary subscription service
+
+222
+00:11:52,000 --> 00:11:55,800
+where you can support the content that you love via a monthly donation
+
+223
+00:11:55,800 --> 00:11:59,200
+to help keep Crash Course free for everyone.. forever.
+
+224
+00:11:59,200 --> 00:12:01,400
+Crash Course is made with Adobe Creative Cloud,
+
+225
+00:12:01,400 --> 00:12:04,200
+check the description for a link to a free trial.
+
+226
+00:12:04,200 --> 00:12:06,000
+Thanks for watching and, you know what?
+
+227
+00:12:06,000 --> 00:12:07,800
+I've been thinking about it, I think I'm going to come clean:
+
+228
+00:12:07,800 --> 00:12:10,200
+I don't feel great about that Star Wars joke earlier.
+
+229
+00:12:10,200 --> 00:00:00,000
+I'm real sorry.
+
