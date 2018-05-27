@@ -3,13 +3,13 @@
 
 ####1. 실행 방법:
 ````
-word = '' 
+$ python3 find_a_word_in_corpus.py word
 ````
 부분에 검색할 단어 입력
 (단어는 띄어쓰기를 포함하지 않아야함)
 
 ####2. 결과: 
-result.csv 파일이 생성됨
+check_list.csv 파일이 생성됨
 위 파일은 검색한 단어를 포함하는 
 
 | url | start | end |
@@ -24,7 +24,7 @@ result.csv 파일이 생성됨
 ####1. 실행방법:
 find_a_word_in_corpus.py
 를 먼저 실행 시켜야함
-(현재 directory에 result.csv 파일 생성된 상태에서 실행 )
+(data folder에 check_list.csv 파일 생성된 상태에서 실행 )
 
 ```
 k=1
