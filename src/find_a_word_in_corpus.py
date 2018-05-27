@@ -1,10 +1,13 @@
 import pandas as pd
 import numpy as np
+import sys
+import os
 
+word = sys.argv[1]
 
-word = '단어'
+path = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
 
-demo = pd.read_csv("kor_sub.csv")
+demo = pd.read_csv( path + "/data/kor_sub.csv" )
 demo = demo.dropna()
 corpus = [[word for word in line.split()] for line in demo["subtitle"]]
 
@@ -20,4 +23,4 @@ for i in range(len(demo)):
 
 result = demo[index == 1][['url','start','end']]
 result = result.reset_index()[['url','start','end']]
-result.to_csv('result.csv')
+result.to_csv(path + '/data/check_list.csv')
