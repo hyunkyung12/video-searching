@@ -34,7 +34,11 @@ for k in range(100):
         elif space_re.match(srt[i]):
             subtitle += [{'subtitle' : srt[i]}]
             next
-                
+    
+    subtitle_string_processing = []
+    for string_processing in subtitle:
+        subtitle_string_processing += [{'subtitle' : re.sub('<.*?>',"",string_processing['subtitle'])}]
+    
     start = []
     end = []
     for i in range(len(time)):
@@ -47,14 +51,15 @@ for k in range(100):
     for i in range(len(subtitle)):
         url += [{'url' : url_kor['URL'][k]}]
     
-    data = pd.concat([pd.DataFrame(url), pd.DataFrame(start), pd.DataFrame(end), pd.DataFrame(subtitle)], axis = 1).iloc[:-1,]
+    data = pd.concat([pd.DataFrame(url), pd.DataFrame(start), pd.DataFrame(end), pd.DataFrame(subtitle_string_processing)], axis = 1).iloc[:-1,]
     final_data = pd.concat([final_data, data], axis = 0)
 
 final_data = final_data.loc[final_data['subtitle'] != ' ',:]
-final_data.to_csv('kor_sub.csv',encoding='UTF8')
+final_data.to_csv('data/kor_sub.csv',encoding='UTF8')
+kor_sub = pd.read_csv("data/kor_sub.csv")
 
 ### 영어 자막 df 만들기
-url_eng = pd.read_csv("data/english_sub.csv").drop('Unnamed: 0', axis=1)
+url_eng = pd.read_csv("english_sub.csv").drop('Unnamed: 0', axis=1)
 final_data2 = pd.DataFrame()
 
 for k in range(1,101):
@@ -75,7 +80,7 @@ for k in range(1,101):
         if time_re.search(srt[i]) :
             time += [{'time' : srt[i]}]
         elif sub_re.search(srt[i]) :
-            if q.search(srt[i-1]) :
+            if sub_re.search(srt[i-1]) :
                 next
             elif sub_re.search(srt[i+1]) :
                 subtitle += [{'subtitle' : srt[i] + ' ' + srt[i+1]}]
@@ -85,6 +90,10 @@ for k in range(1,101):
         elif space_re.match(srt[i]):
             subtitle += [{'subtitle' : srt[i]}]
             next
+                
+    subtitle_string_processing = []
+    for string_processing in subtitle:
+        subtitle_string_processing += [{'subtitle' : re.sub('<.*?>',"",string_processing['subtitle'])}]
                 
     start = []
     end = []
@@ -98,8 +107,9 @@ for k in range(1,101):
     for i in range(len(subtitle)):
         url += [{'url' : url_eng['url'][k-1]}]
     
-    data = pd.concat([pd.DataFrame(url), pd.DataFrame(start), pd.DataFrame(end), pd.DataFrame(subtitle)], axis = 1).iloc[:-1,]
+    data = pd.concat([pd.DataFrame(url), pd.DataFrame(start), pd.DataFrame(end), pd.DataFrame(subtitle_string_processing)], axis = 1).iloc[:-1,]
     final_data2 = pd.concat([final_data2, data], axis = 0)
 
 final_data2 = final_data2.loc[final_data2['subtitle'] != ' ',:]
 final_data2.to_csv('data/eng_sub.csv',encoding='UTF8')
+eng_sub = pd.read_csv("data/eng_sub.scv")
