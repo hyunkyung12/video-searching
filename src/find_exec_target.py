@@ -24,6 +24,7 @@ def exec_word_find(word,table):
     result = table[['url','start','end']][result != -1]
     return result
 
+
 def exec_words_find(words,table):
     words = words.split()
     result = table[['subtitle']].apply(lambda x: iter_in_s(x.values[0],words),axis = 1 )

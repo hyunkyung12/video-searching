@@ -5,8 +5,9 @@
 ````
 $ python3 find_exec_target.py data func word
 ````
-data : csv 파일명 예) kor_sub.csv -> kor_sub
-fucn : 정확한_단어(0), 정확한 단어들을 포함한 문장(1)
+
+data : csv 파일명 예) kor_sub.csb -> kor_sub
+fucn : exec_find
 word : 검색할 단어 입력
 
 ####2. 결과: 
