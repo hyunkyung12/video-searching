@@ -23,16 +23,16 @@ def convert_strtime_to_inttime(st):
     return hour * 3600000 + minute * 60000 + second * 1000 + milsec
 
 def convert_inttime_to_strtime(time):
-    milsec = time % 1000
+    milsec = int(time % 1000)
     time -= milsec
     time /= 1000
-    second = time % 60
+    second = int(time % 60)
     time -= second
     time /= 60
-    minute = time % 60
+    minute = int(time % 60)
     time -= minute
     time /= 60
-    hour = time
+    hour = int(time)
     return str(hour) + ':' + str(minute) + ':' + str(second) + ',' + str(milsec)
 
 def combine_sentence(df, stop_time, stop_length):
