@@ -1,12 +1,12 @@
-## *find_a_word_in_corpus.py*
+## *find_exec_target.py*
 
 
 ####1. 실행 방법:
 ````
-$ python3 find_a_word_in_corpus.py data func word
+$ python3 find_exec_target.py data func word
 ````
-data : csv 파일명
-fucn : 0이면 find_a_word
+data : csv 파일명 예) kor_sub.csb -> kor_sub
+fucn : exec_find
 word : 검색할 단어 입력
 
 ####2. 결과: 
