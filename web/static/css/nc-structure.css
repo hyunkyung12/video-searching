@@ -1,0 +1,90 @@
+/**
+*********************************************************
+* PROJECT :
+* AUTHOR : NCodeArt
+*********************************************************
+*/
+
+/**
+*****************************************************************
+* This file is licensed to NCodeArt. 
+* it's not allowed to copy or reuse it Copyright NCodeArt 2015
+*****************************************************************
+*/
+
+html,
+body,
+#main-wrapper,
+#home-wrapper { 
+	height: 100%;
+}
+#main-wrapper { 
+	position: relative;
+	overflow: hidden; 
+}
+.mCSB_inside>.mCSB_container { margin-right: 0; }
+.pages {
+	background-color: rgba(0,0,0,0.8);
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 9;
+	-webkit-transition: all 0.40s ease-out;
+	-moz-transition: all 0.40s ease-out;
+	-ms-transition: all 0.40s ease-out;
+	-o-transition: all 0.40s ease-out;
+	transition: all 0.40s ease-out;
+}
+.pages.single-page > .outer-wrp { height: 100%; }
+#page-left { left: -100%; }
+#page-right { right: -100%; }
+.active-pg {
+	-webkit-transition: all 0.40s ease-out;
+	-moz-transition: all 0.40s ease-out;
+	-ms-transition: all 0.40s ease-out;
+	-o-transition: all 0.40s ease-out;
+	transition: all 0.40s ease-out;
+}
+#page-left.active-pg { transform:translateX(100%); }
+#page-right.active-pg { transform:translateX(-100%); }
+.pages .pg-close {
+	font-size: 30px;
+	color: #fff;
+	position: absolute;
+	top: 40px;
+	cursor: pointer;
+}
+#page-left.pages .pg-close { right: 40px; }
+#page-right.pages .pg-close { right: 40px; }
+.sections { padding: 100px 0; }
+
+.popup-block {
+	width: 500px;
+	height: 500px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -250px;
+	margin-left: -250px;
+	background-color: rgba(0,0,0,0.9);
+	/*opacity: 0;*/
+	/*display: none;*/
+	-webkit-transition: all 0.40s ease-out;
+	-moz-transition: all 0.40s ease-out;
+	-ms-transition: all 0.40s ease-out;
+	-o-transition: all 0.40s ease-out;
+	transition: all 0.40s ease-out;
+}
+.popup-active .popup-block { display: block; }
+.popup-block .outer-wrp { width: 100%; height: 100%; }
+.popup-block .inner-wrp { width: 100%; }
+.popup-block .popup-close {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 30px;
+	height: 30px;
+	color: #fff;
+	font-size: 24px;
+}
