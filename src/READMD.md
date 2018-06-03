@@ -5,8 +5,8 @@
 ````
 $ python3 find_exec_target.py data func word
 ````
-data : csv 파일명 예) kor_sub.csb -> kor_sub
-fucn : exec_find
+data : csv 파일명 예) kor_sub.csv -> kor_sub
+fucn : 정확한_단어(0), 정확한 단어들을 포함한 문장(1)
 word : 검색할 단어 입력
 
 ####2. 결과: 
@@ -23,7 +23,7 @@ check_list.csv 파일이 생성됨
 
 
 ####1. 실행방법:
-find_a_word_in_corpus.py
+find_exec_target.py
 를 먼저 실행 시켜야함
 (data folder에 check_list.csv 파일 생성된 상태에서 실행 )
 
