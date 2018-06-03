@@ -18,7 +18,7 @@ def exec_find(word,table):
 
 def target_find(table, func,target):
     result = func(target,table)   
-    result.to_csv(path + "/data/" +'/check_list.csv')
+    result.to_csv(path + "/data/" +'check_list.csv')
     return result
 
 if __name__ == "__main__":
