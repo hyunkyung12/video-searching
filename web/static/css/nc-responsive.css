@@ -1,0 +1,279 @@
+/**
+*********************************************************
+* PROJECT : NCHype Under-Construction Template
+* AUTHOR : NCodeArt
+*********************************************************
+*/
+
+
+/**
+*****************************************************************
+* This file is licensed to NCodeArt. 
+* it's not allowed to copy or reuse it Copyright NCodeArt 2015
+*****************************************************************
+*/
+
+/**
+******************************************************************
+*	DESKTOP LAYOUT 
+******************************************************************
+*/
+@media (min-width: 1500px) {
+	
+
+}
+@media (min-width: 1200px) and (max-width: 1499px) {
+	
+	#main-wrapper .container { width: 1100px; }
+
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	
+	#main-wrapper .container { width: 950px; }
+
+}
+@media (min-width: 992px) {
+	
+	
+}
+
+/**
+******************************************************************
+*	MOBILE & TABLET COMMON
+******************************************************************
+*/
+@media (min-width: 200px) and (max-width: 991px) {
+
+	/*----------  SERVICE-SECTION-1  ----------*/
+	.service-section-1 .content-wrp .row > [class*="col"]:last-child .info-box-1{ border-bottom: none; }
+	.service-section-1 .content-wrp > .row:last-child { border-top: 1px solid rgba(255,255,255,0.1); }
+	.service-section-1 .info-box-1 { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+	/*----------  CONTACT-SECTION-1  ----------*/
+	.contact-section-1 .contact-info-1 { margin-bottom: 30px; }
+	.contact-section-1 .contact-box-1 { margin-bottom: 0; }
+
+	/*----------  CONTACT-FORM-1  ----------*/
+	.contact-form-1 .input-group { display: block; }
+	.contact-form-1 .input-group .form-control { float: inherit; }
+
+	/*----------  ABOUT-SECTION-2  ----------*/
+	.about-section-2 .r-part { margin-bottom: 30px; }
+}
+
+/**
+******************************************************************
+*	TABLET
+******************************************************************
+*/
+@media (min-width: 768px) and (max-width: 991px) {
+
+	/*----------  TITLE  ----------*/
+	.title-wrp .sub-title { width: 80%; }
+
+	/*----------  WORK-SECTION-1  ----------*/
+	.work-section-1 .popgallery-widget.eq3 > .cl { width: 50%; }
+}
+
+/**
+******************************************************************
+*	MOBILE
+******************************************************************
+*/
+@media (min-width: 200px) and (max-width: 767px) {	
+
+	#home-wrapper.flex-cc { padding: 100px 0; overflow-y: scroll; }
+	#home-wrapper.flex-cc,
+	.pages.single-page > .outer-wrp { 
+		overflow-y: scroll; 
+		display: block; 
+		position: relative; 
+		padding: 80px 0; 
+	}
+	#home-wrapper .when-btn {
+		position: static;
+	    width: 100%;
+	    border-radius: 0;
+	    margin-top: 20px;
+	}
+
+	/*----------  TITLE  ----------*/
+	.title-wrp .sub-title { width: 100%; }
+
+	/*----------  SOCIAL-ICON  ----------*/
+	#ss_menu {
+		transform: none;
+		width: 100%;
+		position: static;
+		text-align: center;
+		margin-top: 20px;
+	}
+	#ss_menu > div, 
+	#ss_menu > a {
+		position: static;
+	    display: inline-block;
+	    line-height: 40px;
+	    margin: 0 3px;
+	    width: 40px;
+	    height: 40px;
+	    font-size: 18px;
+	}
+	#ss_menu > a i { display: inline-block; }
+	#ss_menu > .menu { display: none; }
+
+	/*----------  INTRO-SECTION-1  ----------*/
+	.intro-section-1 .subscribe-form-1 { width: 100%; }
+
+	/*----------  INTRO-SECTION-1  ----------*/
+	.intro-section-2 .subscribe-form-1 { width: 100%; }
+	.intro-section-2 .intro-text .sub-text { width: 100%; }
+
+	/*----------  CONTACT-SECTION-1  ----------*/
+	.contact-section.flex-cc { padding: 80px 0; overflow-y: scroll; }
+
+	/*----------  WORK-SECTION-1  ----------*/
+	.work-section-1 .popgallery-widget.eq3 > .cl { width: 50%; }
+	.portfolio-box1 .pop-img { margin-top: 0; }
+
+}
+@media (min-width: 600px) and (max-width: 767px) {
+
+	#main-wrapper .container { width: 550px; }
+
+	/*----------  TITLE  ----------*/
+	.title-wrp { margin-bottom: 50px; }
+
+	/*----------  HR-1  ----------*/
+	.hr-1 { margin: 12px auto 8px auto; }
+
+	/*----------  INTRO-SECTION-1  ----------*/
+	.intro-section-1 .logo { margin-bottom: 26px; }
+	.intro-section-1 .text-animation { margin-bottom: 43px; }
+	.intro-section-1 .subscribe-form-1 { margin-bottom: 50px; }
+
+	/*----------  WORK-SECTION-1  ----------*/
+	.portfolio-box1 .pop-img { top: 30px; }
+	.portfolio-box1 .caption .hd { font-size: 18px; }
+	
+}
+@media (min-width: 480px) and (max-width: 599px) {
+
+	#main-wrapper .container { width: 440px; }
+
+	/*----------  TITLE  ----------*/
+	.title-wrp { margin-bottom: 40px; }
+	.title-wrp .title { font-size: 30px; }
+	.title-wrp .title.mini { font-size: 14px; }
+	.title-wrp .sub-title { font-size: 16px; }
+
+	/*----------  HR-1  ----------*/
+	.hr-1 { margin: 12px auto 8px auto; }
+
+	/*----------  POPUP-BLOCK  ----------*/
+	.popup-block { 
+		width: 100%; 
+		left: 0;
+		margin-left: 0;
+	}
+
+	/*----------  INTRO-SECTION-1  ----------*/
+	.intro-section-1 .logo { margin-bottom: 26px; }
+	.intro-section-1 .text-animation { margin-bottom: 43px; }
+	.intro-section-1 .text-animation .hd-text .main-text { font-size: 22px; }
+	.intro-section-1 .text-animation .main-text { font-size: 36px; }
+	.intro-section-1 .subscribe-form-1 { margin-bottom: 50px; }
+
+	/*----------  INTRO-SECTION-2  ----------*/
+	.intro-section-2 .logo { margin-bottom: 26px; }
+	.intro-section-2 .intro-text .main-text { font-size: 36px; }
+	.intro-section-2 .intro-text .sub-text { font-size: 18px; }
+	.intro-section-2 .subscribe-form-1 { margin-bottom: 50px; }
+
+	/*----------  INFO-BOX-1  ----------*/
+	.info-box-1 .img { min-height: 80px; font-size: 70px; }
+	.info-box-1 .info { margin-top: 24px; }
+
+	/*----------  ABOUT-SECTION-2  ----------*/
+	.about-section-2 .list-wrp .list { float: inherit; }
+
+	/*----------  WORK-SECTION-1  ----------*/
+	.work-section-1 .popgallery-widget.eq3 > .cl { width: 50%; }
+	.portfolio-box1 .pop-img { margin-top: 0; top: 10px; }
+	.portfolio-box1 .caption .hd { font-size: 16px; }
+
+}
+@media (min-width: 200px) and (max-width: 479px) {
+	
+	
+	#main-wrapper .container { width: 300px; }
+	.pages .pg-close,
+	#page-right.pages .pg-close { top: 20px; right: 20px; }
+	.sections { padding: 80px 0; }
+
+	/*----------  TITLE  ----------*/
+	.title-wrp { margin-bottom: 30px; }
+	.title-wrp .title { font-size: 30px; }
+	.title-wrp .title.mini { font-size: 14px; }
+	.title-wrp .sub-title { font-size: 16px; }
+
+	/*----------  HR-1  ----------*/
+	.hr-1 { margin: 10px auto 6px auto; }
+
+	/*----------  NAVIGATION-WRP-1  ----------*/
+	.navigation-wrp-1 .nav-link { padding: 10px; }
+
+	/*----------  SUBSCRIBE-FORM-1  ----------*/
+	.subscribe-form-1 .field-group { text-align: center; }
+	.subscribe-form-1 .btn { 
+		background-color: rgba(255,255,255,0.1);
+		border-radius: 5px;
+		box-shadow: 0 3px 10px 0 rgba(0,0,0,0.1);
+		border: 1px solid rgba(255,255,255,0.2);
+		position: inherit; 
+		margin-top: 10px;
+		top: 0;
+		right: 0;
+	}
+
+	/*----------  CLOCK-1  ----------*/
+	.clock.clock-1 .countdown-widget .inner-dashboard { padding: 15px 5px; }
+	.clock.clock-1 .countdown-widget .inner-dash { font-size: 26px; }
+	.clock.clock-1 .countdown-widget .dash { padding: 0 15px; }
+	.clock.clock-1 .countdown-widget .inner-dash > .digit { min-width: 15px; }
+
+	/*----------  POPUP-BLOCK  ----------*/
+	.popup-block { 
+		width: 100%; 
+		left: 0;
+		margin-left: 0;
+		height: auto;
+		padding: 50px 0;
+		top: 0;
+	}
+
+	/*----------  INTRO-SECTION-1  ----------*/
+	.intro-section-1 .logo { margin-bottom: 21px; }
+	.intro-section-1 .text-animation { margin-bottom: 38px; }
+	.intro-section-1 .text-animation .hd-text .main-text { font-size: 20px; }
+	.intro-section-1 .text-animation .main-text { font-size: 30px; }
+	.intro-section-1 .subscribe-form-1 { margin-bottom: 45px; }
+
+	/*----------  INTRO-SECTION-2  ----------*/
+	.intro-section-2 .logo { margin-bottom: 21px; }
+	.intro-section-2 .intro-text .main-text { font-size: 30px; }
+	.intro-section-2 .intro-text .sub-text { font-size: 16px; }
+	.intro-section-2 .subscribe-form-1 { margin-bottom: 45px; }
+
+	/*----------  ABOUT-SECTION-2  ----------*/
+	.about-section-2 .list-wrp .list { float: inherit; }
+
+	/*----------  INFO-BOX-1  ----------*/
+	.info-box-1 { padding: 20px; }
+	.info-box-1 .img { min-height: 80px; font-size: 70px; }
+	.info-box-1 .info { margin-top: 24px; }
+
+	/*----------  WORK-SECTION-1  ----------*/
+	.work-section-1 .popgallery-widget.eq3 > .cl { width: 100%; }
+	.portfolio-box1 .pop-img { margin-top: 0; top: 10px; }
+	.portfolio-box1 .caption .hd { font-size: 16px; }
+}
