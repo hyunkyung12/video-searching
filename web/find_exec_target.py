@@ -17,7 +17,7 @@ import json
 
 def exec_find(word,table):
     result = table[['subtitle']].apply(lambda x: x.values[0].find(word),axis = 1 )
-    result = table[['url','start','end']][result != -1]
+    result = table[['url','start','end','subtitle']][result != -1]
     return result
 
 def target_find(target):
@@ -26,7 +26,7 @@ def target_find(target):
     result = exec_find(target, demo)
     result.to_csv("./data/check_list.csv")
     return result
-
+                            
 def upload_check_list():
     # with open('./data/check_list.csv','r') as f:
     #     reader = csv.reader(f)
@@ -37,7 +37,7 @@ def upload_check_list():
     csvfile = open('./data/check_list.csv', 'r')
     jsonfile = open('file.json', 'w')
 
-    fieldnames = ("num","url","start_time","end")
+    fieldnames = ("num","url","start_time","end","subtitle")
     reader = csv.DictReader( csvfile, fieldnames)
     out = json.dumps( [ row for row in reader ] )
     jsonfile.write(out)
