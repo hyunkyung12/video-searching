@@ -38,8 +38,8 @@
 
 </head>
 <body>
-	
-	<!-- PAGE-LOADER -->
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+	<!-- PAGE-LOADER
 	<div class="page-loader-wrapper page-loader-wrapper-1 flex-cc">
 		<div class="loader">
 			<div class="stick1"></div>
@@ -47,7 +47,7 @@
 			<div class="stick3"></div>
 			<div class="stick4"></div>
 		</div>
-	</div><!-- / PAGE-LOADER -->
+	</div> / PAGE-LOADER -->
 
 	<!-- MAIN-WRAPPER -->
 	<div id="main-wrapper" class="main-wrapper">
@@ -83,7 +83,7 @@
 						<div class="subscribe-form subscribe-form-1" data-animOut="fadeOutUp" data-animIn="fadeInUp">
 							<div class="field-group">
 								<form action="/" method="post" role="form">
-									<textarea id="storyCont" name="myStory" class="form-control" type="text" placeholder="검색어를 입력해주세요" required style="min-height:200px;"></textarea>
+									<textarea id="storyCont" name="myStory" class="form-control" type="text" placeholder="검색어를 입력해주세요" required style="min-height:20px;"></textarea>
 								</form>
 							</div>
 							<div class="msg-wrp"></div>
@@ -92,7 +92,7 @@
 						<!-- NAVIGATION -->
 						<div class="navigation-wrp navigation-wrp-1">
 							<div class="inner-wrp">
-								<a href="#" id="recommend" name="story" data-page="left" class="nav-link hvr-sweep-to-left">SEARCH</a>
+								<a href="#" id="recommend" name="story" data-page="left" class="nav-link hvr-sweep-to-left">KOR</a>
 							</div>
 						</div>
 
@@ -209,15 +209,15 @@
 		                //console.log(response);
 		                //var musicList = JSON.parse(response);
 		                var searchList = JSON.parse(response);
-		                console.log(Number(searchList[6].start_time.slice(3,5))*60+
-								Number(searchList[6].start_time.slice(6,8)))
+		                console.log(searchList[0].subtitle)
 								//searchList[1].start_time.getSeconds);
 
 		                var result = ""
 
 						for(i = 1 ; i < searchList.length ; i++)
 						{
-							result+="<div class=\"row\">";
+							if(searchList[i-1].url != searchList[i].url){ result+="<div class=\"row\">";}
+							
 							// for(j = 0 ; j < 4 ; j++)
 							// {
 							var num = Number(searchList[i].start_time.slice(3,5))*60+
@@ -225,13 +225,51 @@
 							var url1 = searchList[i].url;
 							var url2 = url1.replace("watch", "embed");
 
-							console.log(num);
+							//console.log(num);
 
-							result+="<div class=\"col-sm-6 text-center\">"+searchList[i].start_time.slice(0,8)+"</div>";
-							result+="<div class=\"col-sm-6 text-center\">"+"<iframe src="+url2+"&start="+num+">"+"</iframe>"+"</div>";
-							result+="</div>";		                						
+								if(searchList[i-1].url != searchList[i].url){
+									result+="<div class=\"col-sm-4 text-center\">"+"<iframe src="+url2+"&start="+num+">"+"</iframe>"+"</div>";}
+
+								if(searchList[i-1].url == searchList[i].url){
+									result+="<div class=\"col-sm-4 text-center\">"+"</div>";}		
+
+									result+="<div class=\"col-sm-2 text-center\">";
+									result+=searchList[i].start_time.slice(0,8);				
+									result+="</div>";
+									result+="<div class=\"col-sm-6\">"+searchList[i].subtitle+"</div>";		
+
+							if(searchList[i-1].url != searchList[i].url){result+="</div><hr>";}
 						}
+
 						$(".result-wrp").html(result);
+
+
+
+
+
+						// for(i = 1 ; i < searchList.length ; i++)
+						// {
+						// 	result+="<div class=\"row\">";
+						// 	// for(j = 0 ; j < 4 ; j++)
+						// 	// {
+						// 	var num = Number(searchList[i].start_time.slice(3,5))*60+
+						// 			  Number(searchList[i].start_time.slice(6,8));
+						// 	var url1 = searchList[i].url;
+						// 	var url2 = url1.replace("watch", "embed");
+
+						// 	//console.log(num);
+
+						// 	result+="<div class=\"col-sm-2 text-center\">"+searchList[i].start_time.slice(0,8)+"</div>";
+						// 	if(searchList[i-1].url != searchList[i].url){
+						// 		result+="<div class=\"col-sm-4 text-center\">"+"<iframe src="+url2+"&start="+num+">"+"</iframe>"+"</div>";}
+
+						// 	if(searchList[i-1].url == searchList[i].url){
+						// 		result+="<div class=\"col-sm-4 text-center\">"+"</div>";}								
+						// 	result+="<div class=\"col-sm-6 text-center\">"+searchList[i].subtitle+"</div>";							
+						// 	result+="</div>";		                						
+						// }
+
+						// $(".result-wrp").html(result);
 
 
 
