@@ -34,21 +34,16 @@ def upload_check_list():
     #     check = list(reader)
     #     #check = np.array(fam)
     # return check
-    csvfile = open('./data/check_list.csv', 'r')
-    jsonfile = open('file.json', 'w')
-
     fieldnames = ("num","url","start_time","end","subtitle")
-    reader = csv.DictReader( csvfile, fieldnames)
-    out = json.dumps( [ row for row in reader ] )
-    jsonfile.write(out)
-
+    with open('./data/check_list.csv', 'r') as csvfile:
+        reader = csv.DictReader( csvfile, fieldnames)
+        with open('file.json', 'w') as jsonfile:
+            out = json.dumps( [ row for row in reader ] )
+            jsonfile.write(out)
     with open('file.json', 'r') as f:
     #    txt = f.read()
-    	rtn = json.load(f)
+        rtn = json.load(f)
     #rtn = json.load(txt)
-    print("====================================")
-    print(rtn[1])
-    print("====================================")
 
     return json.dumps(rtn, ensure_ascii=False).encode('utf8')
     # return rtn

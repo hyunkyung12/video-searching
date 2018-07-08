@@ -30,4 +30,4 @@ def recommend(): # button 에 적용될 function 이름
 
 if __name__ == "__main__":
 	#upload_data()
-	app.run()
+	app.run('0.0.0.0')
