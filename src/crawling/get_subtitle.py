@@ -12,14 +12,22 @@ import re # 정규표현식
 from urllib.request import urlopen
 import sys
 import os
+import datetime
+import sqlite3
 
 keyword = "TED"
 driver_path = "tools/chromedriver"
+srt_download_path = "/path/srt/"
 num_pagedown = 0
 
-# setup Driver|Chrome : 크롬드라이버를 사용하는 driver 생성
+con = sqlite3.connect('data/youtubing.db')
 sys.path.append(os.path.dirname(os.path.abspath(driver_path)))
-driver = webdriver.Chrome(os.path.abspath(driver_path))
+
+# 다운로드 경로 설정
+chromeOptions = webdriver.ChromeOptions()
+prefs = {"download.default_directory" : os.getcwd()+srt_download_path}
+chromeOptions.add_experimental_option("prefs",prefs)
+driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chromeOptions)
 
 # 유투브 페이지 들어가서 '자막' 필터 된 '세바시' 입력
 driver.get("https://www.youtube.com/results?sp=EgQQASgBQgQIARIA&search_query=" + keyword ) # 필터: 동영상+자막
@@ -33,6 +41,7 @@ for j in range(num_pagedown):
     elm.send_keys(Keys.END)
     time.sleep(3)
 
+time.sleep(3)
 html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 
@@ -57,7 +66,7 @@ if ad == []:
             channel.append(notices3[i].find(text=True))
         except:
             None
-    dataset = df({'Title': title, 'Link': link, 'Play': play_time, 'Channel': channel })
+    dataset = df({'title': title, 'url': link, 'play_time': play_time, 'channel_name': channel })
 
 else:
     title.append(' ')
@@ -73,8 +82,8 @@ else:
             None
     link.pop()
     title.pop()
-    dataset = df({'Title': title, 'Link': link, 'Play': play_time, 'Channel': channel })
-    dataset = dataset.loc[dataset['Title'] != ' ',:]
+    dataset = df({'title': title, 'url': link, 'start_time': play_time, 'channel': channel })
+    dataset = dataset.loc[dataset['title'] != ' ',:]
 
 print("--- src/crawling/get_subtitle.py START get subtitle meta ---")
 
@@ -83,9 +92,9 @@ link2 = []
 data = []
 
 y = 'http://downsub.com'
-for i in range(len(dataset['Link'])):
+for i in range(len(dataset['url'])):
     try:
-        data = re.sub('https://www.youtube.com/watch\?v\=','', dataset['Link'][i])
+        data = re.sub('https://www.youtube.com/watch\?v\=','', dataset['url'][i])
         link2.append(y +'/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'+ data)
     except:
         None
@@ -159,13 +168,14 @@ for i in range(len(link2)):
     
     srt_down += link_kor + link_eng + link_kor_auto + link_eng_auto
 
-print("--- src/crawling/get_subtitle.py START get subtitle files ({}) ---".format((num_pagedown+1)*20))
+print("--- src/crawling/get_subtitle.py START get subtitle files ({}) ---".format(len(srt_down))
 
 # 자막 다운받기
+num_of_srt = len(srt_down)
 for i, down in enumerate(srt_down):
     driver.get(down)
-    if not i%10:
-        print("--- src/crawling/get_subtitle.py     GET subtitle {}/{} ---".format(i+1, (num_pagedown+1)*20))
+    if not (i+1)%10:
+        print("--- src/crawling/get_subtitle.py     GET subtitle file {}/{} ---".format(i+1, num_of_srt))
 
 print("--- src/crawling/get_subtitle.py START save meta data (video, subtitle) ---")
 
@@ -178,7 +188,15 @@ unlike = []
 subscribe = []
 hit = []
 
-for i, url in enumerate(dataset['Link']):
+def num_parser(s):
+    num = int(re.sub('[^0-9]', '', s))
+    if '천' in s:
+        num *= 1000
+    elif '만' in s:
+        num *= 10000
+    return num
+
+for i, url in enumerate(dataset['url']):
     driver.get(url)
     time.sleep(3)
     html = driver.page_source
@@ -193,19 +211,20 @@ for i, url in enumerate(dataset['Link']):
     
     date.append(date_soup[0].find(text=True).replace('게시일: ',''))
     explain.append(explain_soup[0].find(text=True).split('\n\n')[0])
-    like.append(like_soup[0].findAll(text=True)[-1])
-    unlike.append(unlike_soup[1].findAll(text=True)[-1])
-    subscribe.append(subscribe_soup[0].find(text=True))
-    hit.append(hit_soup[0].find(text=True).replace('조회수 ','').replace('회','').replace(',',''))    
+    like.append(num_parser(str(like_soup[0].findAll(text=True)[-1])))
+    unlike.append(num_parser(str(unlike_soup[1].findAll(text=True)[-1])))
+    subscribe.append(num_parser(str(subscribe_soup[0].find(text=True))))
+    hit.append(num_parser(str(hit_soup[0].find(text=True).replace('조회수 ','').replace('회','').replace(',',''))))
 
     link.append(url)
    
-    if not i%10:
+    if not (i+1)%10:
         print("--- src/crawling/get_subtitle.py     GET subtitle meta {}/{} ---".format(i+1, (num_pagedown+1)*20))
 
-dataset2 = df({'Link' : link, 'Date' : date, 'Explain' : explain, 'Like' : like, 'Unlike' : unlike, 'Subscribe' : subscribe, 'Hit' : hit})
+dataset2 = df({'url' : link, 'uploaded_date' : date, 'summary' : explain, 'like_count' : like, 'unlike_count' : unlike, 'subscribe_count' : subscribe, 'hit_count' : hit, 'keyword' : keyword, 'created_date' : datetime.datetime.now().isoformat()})
 
 srt_dataset = pd.merge(dataset,dataset2)
 
-# 저장
-srt_dataset.to_csv("srt_dataset.csv")
+srt_dataset.to_sql('video_meta', con, if_exists='append', index=False)
+
+con.close()

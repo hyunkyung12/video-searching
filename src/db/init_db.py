@@ -16,6 +16,8 @@ cursor.execute("CREATE TABLE video_meta \
                  like_count INTEGER, \
                  unlike_count INTEGER, \
                  subscribe_count INTEGER, \
+                 channel_name TEXT, \
+                 play_time TEXT, \
                  created_date TEXT)"
 )
 
