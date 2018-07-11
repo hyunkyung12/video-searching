@@ -14,6 +14,7 @@ import sys
 import os
 import datetime
 import sqlite3
+import shutil
 
 keyword = "TED"
 driver_path = "tools/chromedriver"
@@ -21,6 +22,25 @@ srt_download_path = "/path/srt/"
 num_pagedown = 0
 
 con = sqlite3.connect('data/youtubing.db')
+cur = con.cursor()
+cur.execute("SELECT url FROM video_meta")
+url_list = cur.fetchall()
+
+cur.execute("SELECT max(video_id) FROM video_meta")
+temp_max_id = cur.fetchall()
+if temp_max_id[0][0] is None:
+    start_id = 0
+else:
+    start_id = temp_max_id[0][0]
+
+cur.execute("SELECT max(subtitle_id) FROM subtitle_meta")
+temp_subtitle_id = cur.fetchall()
+if temp_subtitle_id[0][0] is None:
+    start_subtitle_id = 0
+else:
+    start_subtitle_id = temp_subtitle_id[0][0]
+    
+
 sys.path.append(os.path.dirname(os.path.abspath(driver_path)))
 
 # 다운로드 경로 설정
@@ -66,7 +86,7 @@ if ad == []:
             channel.append(notices3[i].find(text=True))
         except:
             None
-    dataset = df({'title': title, 'url': link, 'play_time': play_time, 'channel_name': channel })
+    dataset = df({'title': title, 'url': link, 'start_time': play_time, 'channel_name': channel, 'video_id' : [j+start_id+1 for j in range(len(title))]})
 
 else:
     title.append(' ')
@@ -82,7 +102,7 @@ else:
             None
     link.pop()
     title.pop()
-    dataset = df({'title': title, 'url': link, 'start_time': play_time, 'channel': channel })
+    dataset = df({'title': title, 'url': link, 'start_time': play_time, 'channel_name': channel, 'video_id' : [j+start_id+1 for j in range(len(title))]})
     dataset = dataset.loc[dataset['title'] != ' ',:]
 
 print("--- src/crawling/get_subtitle.py START get subtitle meta ---")
@@ -93,16 +113,19 @@ data = []
 
 y = 'http://downsub.com'
 for i in range(len(dataset['url'])):
-    try:
-        data = re.sub('https://www.youtube.com/watch\?v\=','', dataset['url'][i])
-        link2.append(y +'/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'+ data)
-    except:
-        None
-
+    data = re.sub('https://www.youtube.com/watch\?v\=','', dataset['url'][i])
+    link2.append(y +'/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'+ data)
+dataset['downsub_url'] = link2
     
 srt_down = []
-for i in range(len(link2)):
-    r = requests.get(link2[i])
+subtitle_language = []
+is_auto_generated = []
+subtitle_id_list = []
+video_id_list = []
+
+subtitle_id = start_subtitle_id + 1
+for index, row in dataset.iterrows():
+    r = requests.get(row['downsub_url'])
     s = BeautifulSoup(r.content, 'html.parser')
     
     b_list = s.findAll('b')
@@ -111,12 +134,7 @@ for i in range(len(link2)):
     for k in range(len(b_list)):
         lang.append(b_list[k].next_sibling)
     del lang[lang.index(' to:'):len(lang)]
-    
-    link_kor = []
-    link_eng = []
-    link_kor_auto = []
-    link_eng_auto = []
-    
+
     if "\xa0\xa0Korean" in lang:
         down1 = b_list[lang.index("\xa0\xa0Korean")]
         y = 'https://downsub.com'
@@ -126,9 +144,12 @@ for i in range(len(link2)):
         a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
         a = re.sub('amp;','',str(a))
         
-        
-        link_kor.append(y + a)
-    else: pass
+        video_id_list.append(row['video_id'])
+        srt_down.append(y + a)
+        subtitle_language.append('korean')
+        is_auto_generated.append('false')
+        subtitle_id_list.append(subtitle_id)
+        subtitle_id += 1
     
     if "\xa0\xa0English" in lang:
         down2 = b_list[lang.index("\xa0\xa0English")]
@@ -139,8 +160,12 @@ for i in range(len(link2)):
         a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
         a = re.sub('amp;','',str(a))
 
-        link_eng.append(y + a)
-    else: pass
+        video_id_list.append(row['video_id'])
+        srt_down.append(y + a)
+        subtitle_language.append('english')
+        is_auto_generated.append('false')
+        subtitle_id_list.append(subtitle_id)
+        subtitle_id += 1
     
     if "\xa0\xa0Korean (auto-generated)" in lang:
         down3 = b_list[lang.index("\xa0\xa0Korean (auto-generated)")]
@@ -151,8 +176,12 @@ for i in range(len(link2)):
         a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
         a = re.sub('amp;','',str(a))
         
-        link_kor_auto.append(y + a)
-    else: pass
+        video_id_list.append(row['video_id'])
+        srt_down.append(y + a)
+        subtitle_language.append('korean')
+        is_auto_generated.append('true')
+        subtitle_id_list.append(subtitle_id)
+        subtitle_id += 1
     
     if "\xa0\xa0English (auto-generated)" in lang:
         down3 = b_list[lang.index("\xa0\xa0English (auto-generated)")]
@@ -163,21 +192,32 @@ for i in range(len(link2)):
         a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
         a = re.sub('amp;','',str(a))
         
-        link_eng_auto.append(y + a)
-    else: pass
-    
-    srt_down += link_kor + link_eng + link_kor_auto + link_eng_auto
+        video_id_list.append(row['video_id'])
+        srt_down.append(y + a)
+        subtitle_language.append('english')
+        is_auto_generated.append('false')
+        subtitle_id_list.append(subtitle_id)
+        subtitle_id += 1
 
-print("--- src/crawling/get_subtitle.py START get subtitle files ({}) ---".format(len(srt_down))
+print("--- src/crawling/get_subtitle.py START get subtitle files ({}) ---".format(len(srt_down)))
+
+srt_df = df({'language': subtitle_language, 'is_auto_generated': is_auto_generated, 'subtitle_id': subtitle_id_list, 'video_id' : video_id_list})
 
 # 자막 다운받기
 num_of_srt = len(srt_down)
+print("--- src/crawling/get_subtitle.py DOWNLOAD PATH {}".format(os.path.abspath(srt_download_path)))
 for i, down in enumerate(srt_down):
     driver.get(down)
+    filename = max([srt_download_path +"/"+ f for f in os.listdir(filepath)], key=os.path.getctime)
+    shutil.move(os.path.join(dirpath,filename), str(row['subtitle_id']))
     if not (i+1)%10:
         print("--- src/crawling/get_subtitle.py     GET subtitle file {}/{} ---".format(i+1, num_of_srt))
 
-print("--- src/crawling/get_subtitle.py START save meta data (video, subtitle) ---")
+print("--- src/crawling/get_subtitle.py START save meta data (subtitle) ---")
+
+srt_df.to_sql('subtitle_meta', con, if_exists='append', index=False)
+
+print("--- src/crawling/get_subtitle.py START save meta data (video) ---")
 
 # srt_dataset
 date = []

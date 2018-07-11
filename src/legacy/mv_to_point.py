@@ -1,3 +1,4 @@
+# 웹 이전에 유튜브 링크걸어주던거
 import pandas as pd
 from selenium import webdriver
 import sys
