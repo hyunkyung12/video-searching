@@ -21,7 +21,8 @@ driver_path = "tools/chromedriver"
 srt_download_path = "data/srt/"
 num_pagedown = 0
 
-shutil.rmtree(srt_download_path)
+if os.path.isdir('srt_download_path'):
+    shutil.rmtree(srt_download_path)
 os.makedirs(srt_download_path)
 
 con = sqlite3.connect('data/youtubing.db')
