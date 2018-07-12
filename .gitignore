@@ -7,3 +7,4 @@ notebook/*
 *.csv
 *.txt
 *.db
+*.exe

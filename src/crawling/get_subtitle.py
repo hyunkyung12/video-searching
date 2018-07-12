@@ -17,11 +17,11 @@ import sqlite3
 import shutil
 
 keyword = "TED"
-driver_path = "tools/chromedriver"
+driver_path = "tools/chromedriver.exe"
 srt_download_path = "data/srt/"
 num_pagedown = 0
 
-if os.path.isdir('srt_download_path'):
+if os.path.isdir(srt_download_path):
     shutil.rmtree(srt_download_path)
 os.makedirs(srt_download_path)
 
@@ -44,6 +44,12 @@ if temp_subtitle_id[0][0] is None:
 else:
     start_subtitle_id = temp_subtitle_id[0][0]
     
+cur.execute("SELECT url FROM video_meta")
+ori_url = cur.fetchall()
+try:
+    ori_url = [i[0] for i in ori_url]
+except key_error:
+    ori_url = []
 
 sys.path.append(os.path.dirname(os.path.abspath(driver_path)))
 
@@ -86,7 +92,10 @@ if ad == []:
         try:
             title.append(notices[i].get('title'))
             y = 'https://www.youtube.com'
-            link.append(y + notices[i].get('href'))
+            youtube_url = y + notices[i].get('href')
+            if youtube_url in link + ori_url:
+                continue
+            link.append(youtube_url)
             play_time.append(notices2[i].find(text=True).replace("\n","").replace(" ",""))    
             channel.append(notices3[i].find(text=True))
         except:
@@ -100,14 +109,21 @@ else:
         try:
             title.append(notices[i].get('title'))
             y = 'https://www.youtube.com'
-            link.append(y + notices[i].get('href'))
+            youtube_url = y + notices[i].get('href')
+            if youtube_url in link + ori_url:
+                continue
+            link.append(youtube_url)
             play_time.append(notices2[i].find(text=True).replace("\n","").replace(" ",""))    
             channel.append(notices3[i].find(text=True))
         except:
             None
     link.pop()
     title.pop()
-    dataset = df({'title': title, 'url': link, 'play_time': play_time, 'channel_name': channel, 'video_id' : [j+start_id+1 for j in range(len(title))]})
+    dataset = df({'title': title, \
+                  'url': link, \
+                  'play_time': play_time, \
+                  'channel_name': channel, \
+                  'video_id' : [j+start_id+1 for j in range(len(title))]})
     dataset = dataset.loc[dataset['title'] != ' ',:]
 
 print("--- src/crawling/get_subtitle.py START get subtitle meta ---")
@@ -126,6 +142,7 @@ subtitle_language = []
 is_auto_generated = []
 subtitle_id_list = []
 video_id_list = []
+subtitle_filename = []
 
 global download_count
 global subtitle_id
@@ -135,8 +152,9 @@ subtitle_id = start_subtitle_id + 1
 def download_subtitle(url, srt_filename, srt_download_path=srt_download_path):
     global driver
     driver.get(url)
+    time.sleep(3)
     filename = max([srt_download_path + f for f in os.listdir(srt_download_path)], key=os.path.getctime)
-    shutil.move(filename, srt_download_path + srt_filename)
+    #shutil.move(filename, srt_download_path + srt_filename)
 
     global download_count
     download_count += 1
@@ -146,6 +164,7 @@ def download_subtitle(url, srt_filename, srt_download_path=srt_download_path):
     global subtitle_id
     video_id_list.append(row['video_id'])
     subtitle_id_list.append(subtitle_id)
+    subtitle_filename.append(filename)
     subtitle_id += 1
             
 for index, row in dataset.iterrows():
@@ -208,10 +227,14 @@ for index, row in dataset.iterrows():
         a = re.sub('amp;','',str(a))
         
         subtitle_language.append('english')
-        is_auto_generated.append('false')
+        is_auto_generated.append('true')
         download_subtitle(y+a, str(subtitle_id))
 
-srt_df = df({'language': subtitle_language, 'is_auto_generated': is_auto_generated, 'subtitle_id': subtitle_id_list, 'video_id' : video_id_list})
+srt_df = df({'language': subtitle_language, \
+             'is_auto_generated': is_auto_generated, \
+             'subtitle_id': subtitle_id_list, \
+             'video_id' : video_id_list, \
+             'filename' : subtitle_filename})
 
 print("--- src/crawling/get_subtitle.py START save meta data (subtitle) ---")
 
@@ -265,7 +288,15 @@ for i, url in enumerate(dataset['url']):
         print("--- src/crawling/get_subtitle.py     GET subtitle meta {}/{} ---".format(i+1, (num_pagedown+1)*20))
 
 dataset = dataset.drop(['downsub_url'], axis=1)
-dataset2 = df({'url' : link, 'uploaded_date' : date, 'summary' : explain, 'like_count' : like, 'unlike_count' : unlike, 'subscribe_count' : subscribe, 'hit_count' : hit, 'keyword' : keyword, 'created_date' : datetime.datetime.now().isoformat()})
+dataset2 = df({'url' : link, \
+               'uploaded_date' : date, \
+               'summary' : explain, \
+               'like_count' : like, \
+               'unlike_count' : unlike, \
+               'subscribe_count' : subscribe, \
+               'hit_count' : hit, \
+               'keyword' : keyword, \
+               'created_date' : datetime.datetime.now().isoformat()})
 
 srt_dataset = pd.merge(dataset,dataset2)
 

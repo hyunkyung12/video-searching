@@ -1,6 +1,10 @@
 import sqlite3
+import os
 
 DB_DIR = 'data/youtubing.db'
+
+if os.path.isfile(DB_DIR):
+        os.remove(DB_DIR)
 
 con = sqlite3.connect(DB_DIR)
 cursor = con.cursor()
@@ -40,14 +44,14 @@ cursor.execute("CREATE TABLE subtitle_token \
 )
 
 cursor.execute("CREATE TABLE sentence_meta \
-								(sentence_id INTEGER PRIMARY KEY AUTOINCREMENT, \
-								 start_time TEXT, \
-								 end_time TEXT, \
-								 sentence TEXT, \
-								 text_token TEXT, \
-								 embedding_vector TEXT, \
-								 subtitle_id INTEGER, \
-								 FOREIGN KEY(subtitle_id) REFERENCES subtitle_meta(subtitle_id))"
+		(sentence_id INTEGER PRIMARY KEY AUTOINCREMENT, \
+		 start_time TEXT, \
+		 end_time TEXT, \
+		 sentence TEXT, \
+		 text_token TEXT, \
+		 embedding_vector TEXT, \
+		 subtitle_id INTEGER, \
+		 FOREIGN KEY(subtitle_id) REFERENCES subtitle_meta(subtitle_id))"
 )
 
 cursor.close()
