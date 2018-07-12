@@ -10,80 +10,49 @@ con = sqlite3.connect('data/youtubing.db')
 sql_read_subtitle_meta = "SELECT * FROM subtitle_meta"
 srt_dataset = pd.read_sql(sql_read_subtitle_meta, con)
 
-file_list = os.listdir(srt_dir)
+cur = con.cursor()
+cur.execute("SELECT max(subtitle_token_id) FROM subtitle_token")
+start_subtitle_token_id = cur.fetchall()
+if start_subtitle_token_id[0][0] is None:
+    start_subtitle_token_id = 0
+else:
+    start_subtitle_token_id = start_subtitle_token_id[0][0]
 
-final_data = pd.DataFrame()
+subtitle_token_id = start_subtitle_token_id
 
-for i, row in srt_dataset.iterrows():
-    if (i+1)%10 == 0:
-        print('--- src/preprocessing/cleansing_subtitle.py {}/{} ---'.format(i+1, len(srt_dataset)))
+start = []
+end = []
+subtitle_token_id_list = []
+subtitle_id_list = []
+subtitle_string_processing = []
+
+for j, row in srt_dataset.iterrows():
+    if (j+1)%10 == 0:
+        print('--- src/preprocessing/cleansing_subtitle.py cleansing_subtitle {}/{} ---'.format(j+1, len(srt_dataset)))
     if '.srt' not in row['filename']:
         continue
-    #down_title = re.sub('[^가-힣0-9a-zA-Z]', '', m)
-    #down_title = re.sub('DownSubcom', '', down_title)
-    #down_title = re.sub('srt', '', down_title)
-    #down_title = re.sub('1', '', down_title)
-    
-    #if srt_title == down_title:
-    #for k in range(len(srt_dataset)):
-    with open(srt_dir + row['filename'], 'r', encoding='UTF8'):
-        lines = f.readlines()
-    
-    srt = []
-    for i in range(len(lines)):
-        srt += {lines[i].replace('\n','')}
-    time = []
-    subtitle = []
-    time_re = re.compile('..:..:..')
-    sub_re = re.compile('[가-힣a-zA-Z]')
-    space_re = re.compile(' ')
-    for i in range(len(srt)):
-        if time_re.search(srt[i]) :
-            time += [{'Time' : srt[i]}]
-        elif sub_re.search(srt[i]) :
-            if sub_re.search(srt[i-1]) :
-                next
-            elif sub_re.search(srt[i+1]) :
-                subtitle += [{'subtitle_token' : srt[i] + ' ' + srt[i+1]}]
-                next
-            else :
-                subtitle += [{'subtitle_token' : srt[i]}]
-        elif space_re.match(srt[i]):
-            subtitle += [{'subtitle_token' : srt[i]}]
-            next
 
-    subtitle_string_processing = []
-    lang = []
-    for string_processing in subtitle:
-        subtitle_string_processing += [{'subtitle_token' : re.sub('<.*?>',"",string_processing['subtitle_token'])}]
-        #if len(re.compile('[^ㄱ-ㅣ가-힣]+').sub('',string_processing['subtitle_token'])) > 0:
-        #    lang +=[{'language' : int(1)}]
-        #else:
-        #    lang += [{'language' : int(0)}]
+    with open(row['filename'], 'r', encoding='UTF8') as f: # srt_dir + 
+        lines = f.read()
     
-    start = []
-    end = []
-    for i in range(len(time)):
-        a = list(time[i].values())[0]
-        b = a.split(' ')
-        start += [{'start_time' : b[0]}]
-        end += [{'end_time' : b[2]}]
-        
-    url = []
-    title = []
-    #for i in range(len(subtitle)):
-        # url += [{'url' : srt_dataset['url'][k]}]
-        #title += [{'title' : srt_dataset['title'][k]}]
-        
-    #data = pd.concat([pd.DataFrame(title), pd.DataFrame(url), pd.DataFrame(start), pd.DataFrame(end), pd.DataFrame(subtitle_string_processing), pd.DataFrame(lang)], axis = 1).iloc[:-1,]
-    data = DataFrame({'subtitle_token_id' : subtitle_token_id_list, \
-                      'start_time' : start, \
-                      'end_time' : end, \
-                      'subtitle_token' : subtitle, \
-                      'subtitle_id' : subtitle_id_list})
-    final_data = pd.concat([final_data, data], axis = 0)
+    for token in lines.split('\n\n'):
+        if len(token.strip()) == 0:
+            continue
 
-final_data = final_data.loc[final_data['subtitle_token'] != ' ',:]
-final_data = final_data.drop_duplicates(['title', 'subtitle_token', 'start_time'])
+        subtitle_token_id += 1
+        subtitle_token_id_list.append(subtitle_token_id)
+        _, time, *subtitle_token = token.split('\n')
+        s, _, e = time.split(' ')
+        start.append(s)
+        end.append(e)
+        subtitle_string_processing.append(re.sub('<.*?>', "", ' '.join(subtitle_token)))
+        subtitle_id_list.append(row['subtitle_id'])
 
-final_data.to_sql('subtitle_token', con, if_exists='append', index=False)
+data = pd.DataFrame({'subtitle_token_id' : subtitle_token_id_list, \
+                           'start_time' : start, \
+                           'end_time' : end, \
+                           'subtitle_token' : subtitle_string_processing, \
+                           'subtitle_id' : subtitle_id_list})
+
+data = data.loc[data['subtitle_token'] != ' ',:]
+data.to_sql('subtitle_token', con, if_exists='append', index=False)

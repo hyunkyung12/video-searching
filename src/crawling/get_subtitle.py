@@ -15,9 +15,10 @@ import os
 import datetime
 import sqlite3
 import shutil
+import sys
 
-keyword = "TED"
-driver_path = "tools/chromedriver"
+keyword = sys.argv[1]
+driver_path = "tools/chromedriver.exe"
 srt_download_path = "data/srt/"
 num_pagedown = 0
 
@@ -90,11 +91,11 @@ channel = []
 if ad == []:
     for i in range(len(notices)):
         try:
-            title.append(notices[i].get('title'))
             y = 'https://www.youtube.com'
             youtube_url = y + notices[i].get('href')
             if youtube_url in link + ori_url:
                 continue
+            title.append(notices[i].get('title'))
             link.append(youtube_url)
             play_time.append(notices2[i].find(text=True).replace("\n","").replace(" ",""))    
             channel.append(notices3[i].find(text=True))
@@ -107,11 +108,11 @@ else:
     link.append(' ')
     for i in range(len(notices)):
         try:
-            title.append(notices[i].get('title'))
             y = 'https://www.youtube.com'
             youtube_url = y + notices[i].get('href')
             if youtube_url in link + ori_url:
                 continue
+            title.append(notices[i].get('title'))
             link.append(youtube_url)
             play_time.append(notices2[i].find(text=True).replace("\n","").replace(" ",""))    
             channel.append(notices3[i].find(text=True))
@@ -154,7 +155,7 @@ def download_subtitle(url, srt_filename, srt_download_path=srt_download_path):
     driver.get(url)
     time.sleep(3)
     filename = max([srt_download_path + f for f in os.listdir(srt_download_path)], key=os.path.getctime)
-    #shutil.move(filename, srt_download_path + srt_filename)
+    filename = filename.split('/')[-1]
 
     global download_count
     download_count += 1

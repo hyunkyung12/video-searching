@@ -6,5 +6,5 @@ notebook/*
 *.srt
 *.csv
 *.txt
-*.db
 *.exe
+*.log
