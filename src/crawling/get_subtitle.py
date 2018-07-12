@@ -17,7 +17,7 @@ import sqlite3
 import shutil
 
 keyword = "TED"
-driver_path = "tools/chromedriver.exe"
+driver_path = "tools/chromedriver"
 srt_download_path = "data/srt/"
 num_pagedown = 0
 
