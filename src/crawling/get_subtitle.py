@@ -18,8 +18,11 @@ import shutil
 
 keyword = "TED"
 driver_path = "tools/chromedriver"
-srt_download_path = "/path/srt/"
+srt_download_path = "data/srt/"
 num_pagedown = 0
+
+shutil.rmtree(srt_download_path)
+os.makedirs(srt_download_path)
 
 con = sqlite3.connect('data/youtubing.db')
 cur = con.cursor()
@@ -45,8 +48,9 @@ sys.path.append(os.path.dirname(os.path.abspath(driver_path)))
 
 # 다운로드 경로 설정
 chromeOptions = webdriver.ChromeOptions()
-prefs = {"download.default_directory" : os.getcwd()+srt_download_path}
+prefs = {"download.default_directory" : os.getcwd()+'/'+srt_download_path}
 chromeOptions.add_experimental_option("prefs",prefs)
+global driver
 driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chromeOptions)
 
 # 유투브 페이지 들어가서 '자막' 필터 된 '세바시' 입력
@@ -86,7 +90,7 @@ if ad == []:
             channel.append(notices3[i].find(text=True))
         except:
             None
-    dataset = df({'title': title, 'url': link, 'start_time': play_time, 'channel_name': channel, 'video_id' : [j+start_id+1 for j in range(len(title))]})
+    dataset = df({'title': title, 'url': link, 'play_time': play_time, 'channel_name': channel, 'video_id' : [j+start_id+1 for j in range(len(title))]})
 
 else:
     title.append(' ')
@@ -102,7 +106,7 @@ else:
             None
     link.pop()
     title.pop()
-    dataset = df({'title': title, 'url': link, 'start_time': play_time, 'channel_name': channel, 'video_id' : [j+start_id+1 for j in range(len(title))]})
+    dataset = df({'title': title, 'url': link, 'play_time': play_time, 'channel_name': channel, 'video_id' : [j+start_id+1 for j in range(len(title))]})
     dataset = dataset.loc[dataset['title'] != ' ',:]
 
 print("--- src/crawling/get_subtitle.py START get subtitle meta ---")
@@ -117,13 +121,32 @@ for i in range(len(dataset['url'])):
     link2.append(y +'/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D'+ data)
 dataset['downsub_url'] = link2
     
-srt_down = []
 subtitle_language = []
 is_auto_generated = []
 subtitle_id_list = []
 video_id_list = []
 
+global download_count
+global subtitle_id
+download_count = 0
 subtitle_id = start_subtitle_id + 1
+
+def download_subtitle(url, srt_filename, srt_download_path=srt_download_path):
+    global driver
+    driver.get(url)
+    filename = max([srt_download_path + f for f in os.listdir(srt_download_path)], key=os.path.getctime)
+    shutil.move(filename, srt_download_path + srt_filename)
+
+    global download_count
+    download_count += 1
+    if not (download_count)%10:
+        print("--- src/crawling/get_subtitle.py     GET subtitle file {} ---".format(download_count))
+    
+    global subtitle_id
+    video_id_list.append(row['video_id'])
+    subtitle_id_list.append(subtitle_id)
+    subtitle_id += 1
+            
 for index, row in dataset.iterrows():
     r = requests.get(row['downsub_url'])
     s = BeautifulSoup(r.content, 'html.parser')
@@ -144,12 +167,9 @@ for index, row in dataset.iterrows():
         a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
         a = re.sub('amp;','',str(a))
         
-        video_id_list.append(row['video_id'])
-        srt_down.append(y + a)
         subtitle_language.append('korean')
         is_auto_generated.append('false')
-        subtitle_id_list.append(subtitle_id)
-        subtitle_id += 1
+        download_subtitle(y+a, str(subtitle_id))
     
     if "\xa0\xa0English" in lang:
         down2 = b_list[lang.index("\xa0\xa0English")]
@@ -160,12 +180,9 @@ for index, row in dataset.iterrows():
         a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
         a = re.sub('amp;','',str(a))
 
-        video_id_list.append(row['video_id'])
-        srt_down.append(y + a)
         subtitle_language.append('english')
         is_auto_generated.append('false')
-        subtitle_id_list.append(subtitle_id)
-        subtitle_id += 1
+        download_subtitle(y+a, str(subtitle_id))
     
     if "\xa0\xa0Korean (auto-generated)" in lang:
         down3 = b_list[lang.index("\xa0\xa0Korean (auto-generated)")]
@@ -176,13 +193,10 @@ for index, row in dataset.iterrows():
         a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
         a = re.sub('amp;','',str(a))
         
-        video_id_list.append(row['video_id'])
-        srt_down.append(y + a)
         subtitle_language.append('korean')
         is_auto_generated.append('true')
-        subtitle_id_list.append(subtitle_id)
-        subtitle_id += 1
-    
+        download_subtitle(y+a, str(subtitle_id))
+
     if "\xa0\xa0English (auto-generated)" in lang:
         down3 = b_list[lang.index("\xa0\xa0English (auto-generated)")]
         y = 'https://downsub.com'
@@ -192,26 +206,11 @@ for index, row in dataset.iterrows():
         a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
         a = re.sub('amp;','',str(a))
         
-        video_id_list.append(row['video_id'])
-        srt_down.append(y + a)
         subtitle_language.append('english')
         is_auto_generated.append('false')
-        subtitle_id_list.append(subtitle_id)
-        subtitle_id += 1
-
-print("--- src/crawling/get_subtitle.py START get subtitle files ({}) ---".format(len(srt_down)))
+        download_subtitle(y+a, str(subtitle_id))
 
 srt_df = df({'language': subtitle_language, 'is_auto_generated': is_auto_generated, 'subtitle_id': subtitle_id_list, 'video_id' : video_id_list})
-
-# 자막 다운받기
-num_of_srt = len(srt_down)
-print("--- src/crawling/get_subtitle.py DOWNLOAD PATH {}".format(os.path.abspath(srt_download_path)))
-for i, down in enumerate(srt_down):
-    driver.get(down)
-    filename = max([srt_download_path +"/"+ f for f in os.listdir(filepath)], key=os.path.getctime)
-    shutil.move(os.path.join(dirpath,filename), str(row['subtitle_id']))
-    if not (i+1)%10:
-        print("--- src/crawling/get_subtitle.py     GET subtitle file {}/{} ---".format(i+1, num_of_srt))
 
 print("--- src/crawling/get_subtitle.py START save meta data (subtitle) ---")
 
@@ -229,7 +228,10 @@ subscribe = []
 hit = []
 
 def num_parser(s):
-    num = int(re.sub('[^0-9]', '', s))
+    if re.findall('[0-9]', s) != []:
+        num = int(re.sub('[^0-9]', '', s))
+    else:
+        num = 0
     if '천' in s:
         num *= 1000
     elif '만' in s:
@@ -261,6 +263,7 @@ for i, url in enumerate(dataset['url']):
     if not (i+1)%10:
         print("--- src/crawling/get_subtitle.py     GET subtitle meta {}/{} ---".format(i+1, (num_pagedown+1)*20))
 
+dataset = dataset.drop(['downsub_url'], axis=1)
 dataset2 = df({'url' : link, 'uploaded_date' : date, 'summary' : explain, 'like_count' : like, 'unlike_count' : unlike, 'subscribe_count' : subscribe, 'hit_count' : hit, 'keyword' : keyword, 'created_date' : datetime.datetime.now().isoformat()})
 
 srt_dataset = pd.merge(dataset,dataset2)

@@ -1,6 +1,9 @@
 chromedriver
 notebook/*
-data/*
 .ipynb_checkpoint/*
 *.DS_store*
 *.ipynb
+*.srt
+*.csv
+*.txt
+*.db
