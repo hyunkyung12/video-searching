@@ -67,6 +67,7 @@ eng_w2v_model = Word2Vec(eng_morphs, size=300, min_count=2, workers=4, sg=1)
 eng_w2v_model.train(eng_morphs, total_examples=len(eng_morphs), epochs=10)
 eng_w2v_model.save( path + "/data/eng_w2v_model.model")
 print("complete.\n")
+
 # 3. tf_idf
 #tf_idf를 위해 각 비디오별 자막 생성
 print("get tf idf weight...")
@@ -159,6 +160,7 @@ eng_demo['eng_w'] = get_w(eng_demo,eng_subtitle2,'morphs',len(kor_subtitle2))
 kor_demo['r_kor_w'] = get_w(kor_demo,kor_subtitle2,'refined_morphs',0)
 eng_demo['r_eng_w'] = get_w(eng_demo,eng_subtitle2,'refined_morphs',len(kor_subtitle2))
 print("complete.\n")
+
 # 4. mean을 이용한 sentence to vector
 
 def m_seq2vec(lst,model):
