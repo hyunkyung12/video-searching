@@ -1,4 +1,5 @@
 1. get_morphs.py (형태소 분석 결과를 data/morphs.csv로 저장)
+
 ``
 $python get_morphs.py inputfile_name
 ``
@@ -7,6 +8,7 @@ $python get_morphs.py inputfile_name
 
 
 2. get_jaccard_result.py (자카드 결과 data/jaccard_checklist.csv로 저장)
+
 ``
 $python get_jaccard_result.py filename(morphs고정) input_sentence output_num
 ``
@@ -16,10 +18,12 @@ $python get_jaccard_result.py filename(morphs고정) input_sentence output_num
 - output_num 결과값의 개수
 
 3. w2c_sentence_embedding.py (w2v sentence embedding 결과 /data/morphs_vec.csv로 저장)
+
 ``
 $python w2c_sentence_embedding.py 
 ``
 4. get_w2v_result.py (w2v 결과 data/w2v_checklist.csv로 저장)
+
 ``
 $python get_w2v_result.py filename(morphs_vec고정) sentence tokenizing 유사도 num
 ``
