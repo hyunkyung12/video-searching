@@ -237,11 +237,6 @@ srt_df = df({'language': subtitle_language, \
              'video_id' : video_id_list, \
              'filename' : subtitle_filename})
 
-print("--- src/crawling/get_subtitle.py START save meta data (subtitle) ---")
-
-srt_df.to_sql('subtitle_meta', con, if_exists='append', index=False)
-
-print("--- src/crawling/get_subtitle.py START save meta data (video) ---")
 
 # srt_dataset
 date = []
@@ -300,6 +295,12 @@ dataset2 = df({'url' : link, \
                'created_date' : datetime.datetime.now().isoformat()})
 
 srt_dataset = pd.merge(dataset,dataset2)
+
+print("--- src/crawling/get_subtitle.py START save meta data (subtitle) ---")
+
+srt_df.to_sql('subtitle_meta', con, if_exists='append', index=False)
+
+print("--- src/crawling/get_subtitle.py START save meta data (video) ---")
 
 srt_dataset.to_sql('video_meta', con, if_exists='append', index=False)
 
