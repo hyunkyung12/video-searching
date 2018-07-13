@@ -31,13 +31,17 @@ for j, row in srt_dataset.iterrows():
         print('--- src/preprocessing/cleansing_subtitle.py cleansing_subtitle {}/{} ---'.format(j+1, len(srt_dataset)))
     if '.srt' not in row['filename']:
         continue
+    row['filename'] = row['filename'].replace('.crdownload', '')
 
-    with open(row['filename'], 'r', encoding='UTF8') as f: # srt_dir + 
+    with open(srt_dir+row['filename'], 'r', encoding='UTF8') as f: 
         lines = f.read()
     
     for token in lines.split('\n\n'):
-        if len(token.strip()) == 0:
+        token = token.strip()
+        if len(token) == 0:
             continue
+        if token[0] == '\n':
+            token = token[1:]
 
         subtitle_token_id += 1
         subtitle_token_id_list.append(subtitle_token_id)

@@ -18,9 +18,9 @@ import shutil
 import sys
 
 keyword = sys.argv[1]
-driver_path = "tools/chromedriver.exe"
+driver_path = "tools/chromedriver"
 srt_download_path = "data/srt/"
-num_pagedown = 0
+num_pagedown = 5
 
 if os.path.isdir(srt_download_path):
     shutil.rmtree(srt_download_path)
@@ -192,6 +192,19 @@ for index, row in dataset.iterrows():
         is_auto_generated.append('false')
         download_subtitle(y+a, str(subtitle_id))
     
+    elif "\xa0\xa0Korean (auto-generated)" in lang:
+        down3 = b_list[lang.index("\xa0\xa0Korean (auto-generated)")]
+        y = 'https://downsub.com'
+
+        a = down3.find_all("a")
+        a = re.sub('\[<a href=\"\.','',str(a))
+        a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
+        a = re.sub('amp;','',str(a))
+        
+        subtitle_language.append('korean')
+        is_auto_generated.append('true')
+        download_subtitle(y+a, str(subtitle_id))
+    
     if "\xa0\xa0English" in lang:
         down2 = b_list[lang.index("\xa0\xa0English")]
         y = 'https://downsub.com'
@@ -204,21 +217,8 @@ for index, row in dataset.iterrows():
         subtitle_language.append('english')
         is_auto_generated.append('false')
         download_subtitle(y+a, str(subtitle_id))
-    
-    if "\xa0\xa0Korean (auto-generated)" in lang:
-        down3 = b_list[lang.index("\xa0\xa0Korean (auto-generated)")]
-        y = 'https://downsub.com'
 
-        a = down3.find_all("a")
-        a = re.sub('\[<a href=\"\.','',str(a))
-        a = re.sub('\"\>\&gt\;&gt\;Download\&lt\;\&lt\;</a>\]','',str(a))
-        a = re.sub('amp;','',str(a))
-        
-        subtitle_language.append('korean')
-        is_auto_generated.append('true')
-        download_subtitle(y+a, str(subtitle_id))
-
-    if "\xa0\xa0English (auto-generated)" in lang:
+    elif "\xa0\xa0English (auto-generated)" in lang:
         down3 = b_list[lang.index("\xa0\xa0English (auto-generated)")]
         y = 'https://downsub.com'
 
