@@ -6,7 +6,7 @@ import sqlite3
 
 srt_dir = 'data/srt/'
 
-con = sqlite3.connect('../../../data/youtubing.db')
+con = sqlite3.connect('../../data/youtubing.db')
 sql_read_subtitle_meta = "SELECT * FROM subtitle_meta"
 srt_dataset = pd.read_sql(sql_read_subtitle_meta, con)
 
@@ -33,24 +33,33 @@ for j, row in srt_dataset.iterrows():
         continue
 
     try:
-        with open(str_dir+row['filename'], 'r', encoding='UTF8') as f: # srt_dir + 
+        with open(row['filename'], 'r', encoding='UTF8') as f: # srt_dir + 
             lines = f.read()
         
         for token in lines.split('\n\n'):
             if len(token.strip()) == 0:
                 continue
-
-            _, time, *subtitle_token = token.split('\n')
-            if(re.findall('-->',time) != []):
+            splited = token.split('\n')
+            if(splited[0] == ''):                
+                time = splited[2]
                 s, _, e = time.split(' ')
                 start.append(s)
                 end.append(e)
-                subtitle_string_processing.append(re.sub('<.*?>', "", ' '.join(subtitle_token)))
-                subtitle_id_list.append(row['subtitle_id'])
-                subtitle_token_id += 1
-                subtitle_token_id_list.append(subtitle_token_id)
+                subtitle_string_processing.append(re.sub('<.*?>', "", ' '.join(splited[3:])))                
+            elif(splited[0] != ''):
+                time = splited[1]
+                s, _, e = time.split(' ')
+                start.append(s)
+                end.append(e)
+                if(len(splited) == 2):
+                    subtitle_string_processing.append(re.sub('<.*?>', "", ''))
+                else:
+                    subtitle_string_processing.append(re.sub('<.*?>', "", ' '.join(splited[2:])))
+            subtitle_id_list.append(row['subtitle_id'])
+            subtitle_token_id += 1
+            subtitle_token_id_list.append(subtitle_token_id)  
     except IOError:
-        print("file IO error")
+        print("file io error")
         pass
 
 data = pd.DataFrame({'subtitle_token_id' : subtitle_token_id_list, \

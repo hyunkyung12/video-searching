@@ -18,15 +18,16 @@ import shutil
 import sys
 
 keyword = sys.argv[1]
-driver_path = "tools/chromedriver.exe"
+driver_path = "../../tools/chromedriver.exe"
 srt_download_path = "data/srt/"
-num_pagedown = 0
+num_pagedown = 5
 
 if os.path.isdir(srt_download_path):
     shutil.rmtree(srt_download_path)
 os.makedirs(srt_download_path)
 
-con = sqlite3.connect('data/youtubing.db')
+con = sqlite3.connect('../../data/youtubing.db')
+
 cur = con.cursor()
 cur.execute("SELECT url FROM video_meta")
 url_list = cur.fetchall()
@@ -57,6 +58,7 @@ sys.path.append(os.path.dirname(os.path.abspath(driver_path)))
 # 다운로드 경로 설정
 chromeOptions = webdriver.ChromeOptions()
 prefs = {"download.default_directory" : os.getcwd()+'/'+srt_download_path}
+#prefs = {"download.default_directory" : os.path.abspath(os.path.join(os.path.join(os.getcwd(), os.pardir), os.pardir))+'/'+srt_download_path}
 chromeOptions.add_experimental_option("prefs",prefs)
 global driver
 driver = webdriver.Chrome(executable_path=driver_path, chrome_options=chromeOptions)
@@ -265,7 +267,7 @@ def num_parser(s):
 
 for i, url in enumerate(dataset['url']):
     driver.get(url)
-    time.sleep(3)
+    time.sleep(5)
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
     

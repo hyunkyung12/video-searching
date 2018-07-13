@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-DB_DIR = 'data/youtubing.db'
+DB_DIR = '../../data/youtubing.db'
 
 if os.path.isfile(DB_DIR):
         os.remove(DB_DIR)
