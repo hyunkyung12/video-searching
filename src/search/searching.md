@@ -22,6 +22,7 @@ $python get_jaccard_result.py filename(morphs고정) input_sentence output_num
 ``
 $python w2c_sentence_embedding.py 
 ``
+
 4. get_w2v_result.py (w2v 결과 data/w2v_checklist.csv로 저장)
 
 ``
