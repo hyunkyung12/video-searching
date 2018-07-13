@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import numpy as np
 import csv
-from find_exec_target import exec_find, target_find, upload_check_list
+from find_exec_target import iter_in_s, exec_find, exec_words_find, target_find, write_json, read_json, make_new_json
 
 app = Flask(__name__)
 
@@ -14,8 +14,8 @@ def index():
     return(render_template("prac.html"))
 
 @app.route('/recommend', methods=['GET', 'POST'])
-
 def recommend(): # button 에 적용될 function 이름
+    #render_template("prac.html")
     rst = "replay"
     if request.method == 'POST':
         try:
@@ -24,10 +24,9 @@ def recommend(): # button 에 적용될 function 이름
             rst = target_find(inputStory)
         except Exception as e:
             print(e)
-    
-    rtn = upload_check_list()
+    rtn = make_new_json()
     return rtn
 
 if __name__ == "__main__":
 	#upload_data()
-	app.run('0.0.0.0')
+	app.run()

@@ -37,7 +37,7 @@
 	<link rel="stylesheet" type="text/css" href="./static/css/custom.css">
 
 </head>
-<body>
+<body style="background-color:#5c5c5c">
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 	<!-- PAGE-LOADER
 	<div class="page-loader-wrapper page-loader-wrapper-1 flex-cc">
@@ -75,7 +75,8 @@
 					<div class="container">
 						<!-- INTRO TEXT -->
 						<div class="intro-text">
-							<h1 class="main-text">Video Searching</h1>
+							<!-- <h1 class="main-text">Video Searching</h1> -->
+							<img src="../static/images/logo2.png" style="width:300px;">
 							<hr class="hr-1">
 						</div><!-- / INTRO TEXT -->
 
@@ -197,127 +198,79 @@
 	<!-- TEMPLATE SCRIPT -->
 	<script src="./static/js/nc-common.js"></script>
 	<script>
+
+
 		$(function() {
 		    $('#recommend').click(function() {
 		        document.getElementById("cont").innerHTML = $('#storyCont').val();
-
+		        
 		        $.ajax({
 		            url: '/recommend',
 		            data: $('form').serialize(),
 		            type: 'POST',
 		            success: function(response) {
-		                //console.log(response);
-		                //var musicList = JSON.parse(response);
+		            	var typed = $('#storyCont').val();
+		            	var newreg = typed.split(' ').join('|');
+		            	var re = new RegExp(newreg, 'g');
+
+		            	//console.log(typed);
+		            	//console.log(newreg);
+		            	//console.log(re);
+
 		                var searchList = JSON.parse(response);
-		                console.log(searchList[0].subtitle)
-								//searchList[1].start_time.getSeconds);
 
-		                var result = ""
+		                //console.log(searchList.length);
 
-						for(i = 1 ; i < searchList.length ; i++)
+		                var result = "";
+
+		                if (searchList['url'].length == 0){
+		                	result+="<h5 style=\"text-align:center\">검색 결과가 존재하지 않습니다.</h5>";
+		                }
+
+		                else{
+						for(i = 0 ; i < searchList['url'].length ; i++)
 						{
-							if(searchList[i-1].url != searchList[i].url){ result+="<div class=\"row\">";}
-							
-							// for(j = 0 ; j < 4 ; j++)
-							// {
-							var num = Number(searchList[i].start_time.slice(3,5))*60+
-									  Number(searchList[i].start_time.slice(6,8));
-							var url1 = searchList[i].url;
-							var url2 = url1.replace("watch", "embed");
 
-							//console.log(num);
+							result+="<div class=\"row\">";
+							var url1 = searchList['url'][i];
 
-								if(searchList[i-1].url != searchList[i].url){
-									result+="<div class=\"col-sm-4 text-center\">"+"<iframe src="+url2+"&start="+num+">"+"</iframe>"+"</div>";}
+								result+="<div class=\"col-sm-4 text-center ml-5\">";
+									result+="<iframe src="+url1+">"+"</iframe>";
+								result+="</div>";						
+								result+="<div class=\"col-sm-8\">";		
 
-								if(searchList[i-1].url == searchList[i].url){
-									result+="<div class=\"col-sm-4 text-center\">"+"</div>";}		
+								for(j = 0 ; j < searchList['count'][i] ; j++){
+									var num = Number(searchList['start_time'][i][j].slice(3,5))*60+
+											  Number(searchList['start_time'][i][j].slice(6,8));
+									result+="<div class=\"col-sm-2\">";
 
-									result+="<div class=\"col-sm-2 text-center\">";
-									result+=searchList[i].start_time.slice(0,8);				
+									result+="<a href="+url1+"?start="+num+" target=\"_blank\">"+searchList['start_time'][i][j].slice(0,8)+"</a>";				
 									result+="</div>";
-									result+="<div class=\"col-sm-6\">"+searchList[i].subtitle+"</div>";		
 
-							if(searchList[i-1].url != searchList[i].url){result+="</div><hr>";}
+
+									result+="<div class=\"col-sm-10\">";
+										result+="<p style=\"width: 200%; overflow: hidden; text-overflow: ellipsis;\">";
+											var str = searchList['subtitle'][i][j];
+											var matched = str.match(re);
+											if(matched != null){
+												for(k=0 ; k < matched.length ; k++){
+													str = str.replace(new RegExp(matched[k], 'g'),'<b style=\"color:white\">'+matched[k]+'</b>');
+												}												
+											}
+											result+=str;
+										result+="</p>";
+									result+="</div>";
+								}
+								result+="</div>";	
+								result+="</div>";
+								result+="<hr>";
 						}
+
+						}	
+						
 
 						$(".result-wrp").html(result);
 
-
-
-
-
-						// for(i = 1 ; i < searchList.length ; i++)
-						// {
-						// 	result+="<div class=\"row\">";
-						// 	// for(j = 0 ; j < 4 ; j++)
-						// 	// {
-						// 	var num = Number(searchList[i].start_time.slice(3,5))*60+
-						// 			  Number(searchList[i].start_time.slice(6,8));
-						// 	var url1 = searchList[i].url;
-						// 	var url2 = url1.replace("watch", "embed");
-
-						// 	//console.log(num);
-
-						// 	result+="<div class=\"col-sm-2 text-center\">"+searchList[i].start_time.slice(0,8)+"</div>";
-						// 	if(searchList[i-1].url != searchList[i].url){
-						// 		result+="<div class=\"col-sm-4 text-center\">"+"<iframe src="+url2+"&start="+num+">"+"</iframe>"+"</div>";}
-
-						// 	if(searchList[i-1].url == searchList[i].url){
-						// 		result+="<div class=\"col-sm-4 text-center\">"+"</div>";}								
-						// 	result+="<div class=\"col-sm-6 text-center\">"+searchList[i].subtitle+"</div>";							
-						// 	result+="</div>";		                						
-						// }
-
-						// $(".result-wrp").html(result);
-
-
-
-
-
-
-
-
-
-
-		    //             var result = ""
-						// result+="<table>";
-						// for(i = 1 ; i < searchList.length ; i++)
-						// {
-						// 	result+="<tr>";
-						// 	// for(j = 0 ; j < 4 ; j++)
-						// 	// {
-						// 	var num = Number(searchList[i].start_time.slice(3,5))*60+
-						// 			  Number(searchList[i].start_time.slice(6,8));
-						// 	var url1 = searchList[i].url;
-						// 	var url2 = url1.replace("watch", "embed");
-
-						// 	console.log(num);
-
-						// 	result+="<td>"+searchList[i].start_time.slice(0,8)+"</td>";
-						// 	result+="<td>"+"<a href="+searchList[i].url+"&start="+num+">"+
-						// 		"</a>"+"</td>";
-						// 	// }
-						// 	result+="<td>"+"<iframe src="+url2+"&start="+num+">"+"</iframe>"+"</td>"
-						// 	result+="</tr>";
-						// }
-						// result+="</table>";		                
-						// $(".result-wrp").html(result);
-						// document.write("<table>");
-						// for(i = 0 ; i < searchList.length ; i++)
-						// {
-						// 	document.write("<tr>");
-						// 	// for(j = 0 ; j < 4 ; j++)
-						// 	// {
-						// 	document.write("<td>"+searchList[i].start_time+"</td>");
-						// 	document.write("<td>"+"<a href="+searchList[i].url+">"+"링크"+"</a>"+"</td>");
-						// 	// }
-						// 	document.write("</tr>");
-						// }
-						// document.write("</table>");		                
-		                //document.getElementById("song1").innerHTML = searchList.url;
-		                // document.getElementById("song1").innerHTML = searchList.url;
-		                // document.getElementById("song2").innerHTML = searchList.start_time;
 		            },
 		            error: function(error) {
 		                console.log(error);
