@@ -19,29 +19,39 @@ import math
 from gensim.models import Word2Vec
 from sklearn.metrics.pairwise import *
 
-model = sys.argv[1]
+import sqlite3
 
-# 1. 파일 불러오기
-path = os.path.dirname(os.path.abspath(os.path.dirname(__file__)))
-demo = pd.read_csv( path + "/data/morphs.csv" )
-demo = demo.dropna()
+con = sqlite3.connect('data/youtubing.db')
 
-# del demo['Unnamed: 0']
-# del demo['index']
+#파일 불러오기
+sql_stc = "SELECT \
+                A.sentence_id as sentence_id, \
+                A.start_time as start, \
+                A.end_time as end, \
+                A.sentence as subtitle, \
+                A.text_token as text_token, \
+                A.embedding_vector as embedding_vector, \
+                A.subtitle_id as v_id, \
+                B.filename as filename, \
+                B.language as lan, \
+                B.is_auto_generated as is_auto_generated, \
+                B.video_id as video_id \
+           FROM sentence_meta as A JOIN subtitle_meta as B ON A.subtitle_id = B.subtitle_id "
+demo = pd.read_sql(sql_stc, con)
 
-demo['morphs'] = demo.apply(lambda row:literal_eval(row['morphs']), axis=1)
-demo['refined_morphs'] = demo.apply(lambda row:literal_eval(row['refined_morphs']), axis=1)
+#demo['morphs'] = demo.apply(lambda row:literal_eval(row['morphs']), axis=1)
+demo['text_token'] = demo.apply(lambda row:literal_eval(row['text_token']), axis=1)
 
 #kor/eng 나누기
-kor_demo = demo[demo['lan'] == 1]
-eng_demo = demo[demo['lan'] == 0]
+kor_demo = demo[demo['lan'] == "korean"]
+eng_demo = demo[demo['lan'] == "english"]
 eng_demo = eng_demo.reset_index()
 
-kor_morphs = kor_demo['morphs']
-kor_refined_morphs = kor_demo['refined_morphs']
+#kor_morphs = kor_demo['morphs']
+kor_refined_morphs = kor_demo['text_token']
 
-eng_morphs = eng_demo['morphs']
-eng_refined_morphs = eng_demo['refined_morphs']
+#eng_morphs = eng_demo['morphs']
+eng_refined_morphs = eng_demo['text_token']
 
 # 2. train word2vec/ft model
 if model == 'w2v':
@@ -50,12 +60,12 @@ if model == 'w2v':
     print(" 1.train korea w2c model ...")
     kor_w2v_model = Word2Vec(kor_morphs, size=300, min_count=2, workers=4, sg=1)
     kor_w2v_model.train(kor_morphs, total_examples=len(kor_morphs), epochs=10)
-    kor_w2v_model.save( path + "/data/kor_w2v_model.model")
+    kor_w2v_model.save("/data/kor_w2v_model.model")
     
     print(" 2.train english w2v model ...")
     eng_w2v_model = Word2Vec(eng_morphs, size=300, min_count=2, workers=4, sg=1)
     eng_w2v_model.train(eng_morphs, total_examples=len(eng_morphs), epochs=10)
-    eng_w2v_model.save( path + "/data/eng_w2v_model.model")
+    eng_w2v_model.save("/data/eng_w2v_model.model")
 
     print("complete.\n")
 
@@ -64,11 +74,11 @@ elif model == 'ft':
     print("train&save fastText model...")
 
     print(" 1. load pretrained korean fastText model...")
-    pkl_file = open(path+ '/data/ft_vec1.pkl', 'rb')
+    pkl_file = open('/data/ft_vec1.pkl', 'rb')
     mydict1 = pickle.load(pkl_file)
     pkl_file.close()
 
-    pkl_file2 = open(path + '/data/ft_vec2.pkl', 'rb')
+    pkl_file2 = open('/data/ft_vec2.pkl', 'rb')
     mydict2 = pickle.load(pkl_file2)
     pkl_file2.close()
 
@@ -82,7 +92,7 @@ elif model == 'ft':
     print(" 2.train english w2v model ...")
     eng_w2v_model = Word2Vec(eng_morphs, size=300, min_count=2, workers=4, sg=1)
     eng_w2v_model.train(eng_morphs, total_examples=len(eng_morphs), epochs=10)
-    eng_w2v_model.save( path + "/data/eng_w2v_model.model")
+    eng_w2v_model.save("/data/eng_w2v_model.model")
 
     print("complete.\n")
 
@@ -92,19 +102,19 @@ else:
     print(" 1.train korea w2c model ...")
     kor_w2v_model = Word2Vec(kor_morphs, size=300, min_count=2, workers=4, sg=1)
     kor_w2v_model.train(kor_morphs, total_examples=len(kor_morphs), epochs=10)
-    kor_w2v_model.save( path + "/data/kor_w2v_model.model")
+    kor_w2v_model.save("/data/kor_w2v_model.model")
 
     print(" 2.train english w2v model ...")
     eng_w2v_model = Word2Vec(eng_morphs, size=300, min_count=2, workers=4, sg=1)
     eng_w2v_model.train(eng_morphs, total_examples=len(eng_morphs), epochs=10)
-    eng_w2v_model.save( path + "/data/eng_w2v_model.model")
+    eng_w2v_model.save("/data/eng_w2v_model.model")
 
     print(" 3. load pretrained korean fastText model...")
-    pkl_file = open(path+ '/data/ft_vec1.pkl', 'rb')
+    pkl_file = open('/data/ft_vec1.pkl', 'rb')
     mydict1 = pickle.load(pkl_file)
     pkl_file.close()
 
-    pkl_file2 = open(path + '/data/ft_vec2.pkl', 'rb')
+    pkl_file2 = open('/data/ft_vec2.pkl', 'rb')
     mydict2 = pickle.load(pkl_file2)
     pkl_file2.close()
 
@@ -127,23 +137,23 @@ def get_subtitle_per_v(demo,start_v_id):
 
     #url,morphs,refined_morphs
     url_lst = []
-    morphs_lst = []
+    #morphs_lst = []
     refined_morphs_lst = []
     
     for i in range(v_num):
         url = demo[demo['v_id'] == (i + start_v_id) ]['url'].values[0]
         url_lst.append(url)
         
-        morphs = demo[demo['v_id'] == (i + start_v_id)]['morphs'].tolist()
-        morphs_lst.append(list(chain.from_iterable(morphs)))
+        #morphs = demo[demo['v_id'] == (i + start_v_id)]['morphs'].tolist()
+        #morphs_lst.append(list(chain.from_iterable(morphs)))
 
-        refined = demo[demo['v_id'] == (i + start_v_id)]['refined_morphs'].tolist()
+        refined = demo[demo['v_id'] == (i + start_v_id)]['text_token'].tolist()
         refined_morphs_lst.append(list(chain.from_iterable(refined)))
     
     #dictionary
     raw_data['url'] = url_lst
-    raw_data['morphs'] = morphs_lst
-    raw_data['refined_morphs'] = refined_morphs_lst
+    #raw_data['morphs'] = morphs_lst
+    raw_data['text_token'] = refined_morphs_lst
     
     #dataframe
     subtitle2 = pd.DataFrame(raw_data)
