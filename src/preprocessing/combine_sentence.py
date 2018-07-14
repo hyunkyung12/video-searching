@@ -75,7 +75,7 @@ def is_pm_or_am(sentence):
 def combine_sentence(df, stop_time, stop_length, min_length):
     url_list = list(set(df['subtitle_id']))
     print("--- src/preprocessing/combine_sentence.py START combine sentence {} ---".format(len(url_list)))
-    new_df = pd.DataFrame(columns=['subtitle_id', 'start_time', 'end_time', 'subtitle_token'])
+    new_df = pd.DataFrame(columns=['subtitle_id', 'start_time', 'end_time', 'sentence'])
 
     for i, url in enumerate(url_list):
         if (i+1) % 10 == 0:
@@ -112,7 +112,7 @@ def combine_sentence(df, stop_time, stop_length, min_length):
                         s_time = start_time
                     else:
                         s_time = convert_inttime_to_strtime(time)
-                    new_df = new_df.append({'subtitle_id' : url, 'start_time' : s_time, 'end_time': end_time, 'subtitle_token' : sentence}, ignore_index=True)
+                    new_df = new_df.append({'subtitle_id' : url, 'start_time' : s_time, 'end_time': end_time, 'sentence' : sentence}, ignore_index=True)
                     subtitle = subtitle[sep_ind:]
                     sentence = ""
                     time = convert_strtime_to_inttime(s_time)
@@ -133,5 +133,5 @@ def combine_sentence(df, stop_time, stop_length, min_length):
 
 
 demo = combine_sentence(demo, stop_time, stop_length, min_length)
-
+print(demo.shape)
 demo.to_sql('sentence_meta', con, if_exists='append', index=False)

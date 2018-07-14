@@ -20,7 +20,7 @@ import sys
 keyword = sys.argv[1]
 driver_path = "tools/chromedriver"
 srt_download_path = "data/srt/"
-num_pagedown = 5
+num_pagedown = 0
 
 if os.path.isdir(srt_download_path):
     shutil.rmtree(srt_download_path)
