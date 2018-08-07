@@ -1,5 +1,9 @@
 # Video Search
 
+### 프로젝트 상세
+[제 6회 투빅스 데이터컨퍼런스](http://www.datamarket.kr/xe/board_pdzw77/44611)
+
+
 ### 날 따라 해봐요 (180713)
 1. `python src/crawling/get_subtitle.py keyword`
 	keyword에는 검색할 단어(혹은 문장)가 들어가야 함!
